@@ -11,11 +11,15 @@
 #import "cocos2d.h"
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer
+@interface HelloWorldLayer : CCLayerColor
 {
+    CCSprite *receptor;
+    CCSprite * selSprite;
+    NSMutableArray * movableSprites;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+-(CGFloat)angleAtPosition:(CGPoint)position;
 
 @end
