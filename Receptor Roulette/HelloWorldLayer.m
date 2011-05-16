@@ -89,7 +89,7 @@
 }
 
 -(CGFloat)angleAtPosition:(CGPoint)position {
-    return -35*cos(position.y*M_PI/320)+350*pow(M_E, position.x*-.014);
+	return -35*cos(position.x*M_PI/320)+350*pow(M_E, position.y*-.014);
 }
 
 // handles movement
@@ -112,15 +112,6 @@
     [self panForTranslation:translation];    
 }
 
-
-
-
-
-
-
-
-
-
 /*- (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
     CGPoint location = [self convertTouchToNodeSpace:touch];
@@ -130,6 +121,52 @@
         NSLog(@"touched planet1");
     }
 }*/
+
+- (void) update: (ccTime) dt
+{
+	CGSize size = [[CCDirector sharedDirector] winSize];
+
+	for (CCSprite * cell in movableSprites) {
+		cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+		cell.rotation = [self angleAtPosition: cell.position];
+		
+		if (cell.position.x >= (size.width + cell.contentSize.width)) {
+			[movableSprites removeObject: cell];
+			[self removeChild: cell cleanup:YES];
+		}
+	}
+}
+
+- (void) spawnTCell: (ccTime) dt
+{
+	// FIXME: Add increasing probabilities based on total time passed
+	if (arc4random() & 1) {
+		CCSprite * cell = [CCSprite spriteWithFile: @"T-Cell_Draft1.png"];
+		CGSize size = [[CCDirector sharedDirector] winSize];
+		cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
+							(size.height - cell.contentSize.height * 2)
+							+ cell.contentSize.height );
+		cell.scale = 0.0;
+		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 1.0 ];
+		[cell runAction: scaleAction];
+		[movableSprites addObject: cell];
+		[self addChild: cell];
+	}
+}
+
+- (void) onEnter
+{
+	[super onEnter];
+	[self scheduleUpdate];
+	[self schedule: @selector(spawnTCell:) interval: 1.0];
+}
+
+- (void) onExit
+{
+	[self unscheduleUpdate];
+	[self unschedule: @selector(spawnTCell:)];
+	[super onExit];
+}
 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
