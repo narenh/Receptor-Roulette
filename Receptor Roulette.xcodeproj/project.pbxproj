@@ -128,9 +128,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B311B38137C26BC000FB18A /* Planet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Planet1.png; sourceTree = "<group>"; };
-		9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "T-Cell_Draft1.png"; sourceTree = "<group>"; };
-		9B311B3D137C3CF2000FB18A /* Receptor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Receptor.png; path = "Receptor Roulette/Receptor.png"; sourceTree = "<group>"; };
+		9B311B38137C26BC000FB18A /* Planet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Planet1.png; path = ../Planet1.png; sourceTree = "<group>"; };
+		9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "T-Cell_Draft1.png"; path = "../T-Cell_Draft1.png"; sourceTree = "<group>"; };
+		9B311B3D137C3CF2000FB18A /* Receptor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Receptor.png; sourceTree = "<group>"; };
 		9BAF409C1379F6F80007BC91 /* Receptor Roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Receptor Roulette.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAF40A01379F6F80007BC91 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9BAF40A21379F6F80007BC91 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -387,13 +387,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AD7D34B1381B2C800F39630 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF40C51379F6F80007BC91 /* cocos2d */,
+				9BAF41B71379F6FA0007BC91 /* CocosDenshion */,
+				9BAF41C61379F6FA0007BC91 /* cocoslive */,
+				9BAF41D11379F6FA0007BC91 /* TouchJSON */,
+				9BAF41E51379F6FA0007BC91 /* FontLabel */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 		9BAF40911379F6F80007BC91 = {
 			isa = PBXGroup;
 			children = (
 				9BAF40B01379F6F80007BC91 /* Receptor Roulette */,
-				9B311B38137C26BC000FB18A /* Planet1.png */,
-				9B311B3D137C3CF2000FB18A /* Receptor.png */,
-				9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */,
+				0AD7D34B1381B2C800F39630 /* Dependencies */,
 				9BAF409F1379F6F80007BC91 /* Frameworks */,
 				9BAF409D1379F6F80007BC91 /* Products */,
 			);
@@ -437,11 +447,6 @@
 				9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */,
 				9BAF42041379F6FA0007BC91 /* GameConfig.h */,
 				9BAF40B11379F6F80007BC91 /* Resources */,
-				9BAF40C51379F6F80007BC91 /* cocos2d */,
-				9BAF41B71379F6FA0007BC91 /* CocosDenshion */,
-				9BAF41C61379F6FA0007BC91 /* cocoslive */,
-				9BAF41D11379F6FA0007BC91 /* TouchJSON */,
-				9BAF41E51379F6FA0007BC91 /* FontLabel */,
 				9BAF41F71379F6FA0007BC91 /* Supporting Files */,
 			);
 			path = "Receptor Roulette";
@@ -450,6 +455,9 @@
 		9BAF40B11379F6F80007BC91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B311B38137C26BC000FB18A /* Planet1.png */,
+				9B311B3D137C3CF2000FB18A /* Receptor.png */,
+				9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */,
 				9BAF40B21379F6F80007BC91 /* Default.png */,
 				9BAF40B41379F6F80007BC91 /* fps_images.png */,
 				9BAF40B61379F6F80007BC91 /* Icon-72.png */,
@@ -633,6 +641,7 @@
 				9BAF41B41379F6FA0007BC91 /* ZipUtils.m */,
 			);
 			name = cocos2d;
+			path = "Receptor Roulette";
 			sourceTree = "<group>";
 		};
 		9BAF41B71379F6FA0007BC91 /* CocosDenshion */ = {
@@ -649,6 +658,7 @@
 				9BAF41C31379F6FA0007BC91 /* SimpleAudioEngine.m */,
 			);
 			name = CocosDenshion;
+			path = "Receptor Roulette";
 			sourceTree = "<group>";
 		};
 		9BAF41C61379F6FA0007BC91 /* cocoslive */ = {
@@ -662,6 +672,7 @@
 				9BAF41CE1379F6FA0007BC91 /* cocoslive.m */,
 			);
 			name = cocoslive;
+			path = "Receptor Roulette";
 			sourceTree = "<group>";
 		};
 		9BAF41D11379F6FA0007BC91 /* TouchJSON */ = {
@@ -682,6 +693,7 @@
 				9BAF41E41379F6FA0007BC91 /* JSONRepresentation.h */,
 			);
 			name = TouchJSON;
+			path = "Receptor Roulette";
 			sourceTree = "<group>";
 		};
 		9BAF41E51379F6FA0007BC91 /* FontLabel */ = {
@@ -700,6 +712,7 @@
 				9BAF41F41379F6FA0007BC91 /* ZFont.m */,
 			);
 			name = FontLabel;
+			path = "Receptor Roulette";
 			sourceTree = "<group>";
 		};
 		9BAF41F71379F6FA0007BC91 /* Supporting Files */ = {
@@ -736,6 +749,9 @@
 /* Begin PBXProject section */
 		9BAF40931379F6F80007BC91 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Trustees of the University of Chicago";
+			};
 			buildConfigurationList = 9BAF40961379F6F80007BC91 /* Build configuration list for PBXProject "Receptor Roulette" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
