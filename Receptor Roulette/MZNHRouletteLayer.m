@@ -40,6 +40,8 @@
         receptor.scale = 8;
         receptor.position = ccp(720, size.height/2);
         [self addChild:receptor];
+
+        movableSprites = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
