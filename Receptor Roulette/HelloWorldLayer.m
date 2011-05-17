@@ -89,7 +89,11 @@
 }
 
 -(CGFloat)angleAtPosition:(CGPoint)position {
-	return -35*cos(position.x*M_PI/320)+350*pow(M_E, position.y*-.014);
+	if (abs(160 - position.y) < 2) {
+		return 0.0;
+	} else {
+		return 90 * (atanf((600 - position.x) / (160 - position.y)) + M_PI * (abs(position.y-160)/(position.y-160))/2);
+	}
 }
 
 // handles movement
