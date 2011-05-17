@@ -11,7 +11,7 @@
 #import "cocos2d.h"
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayerColor
+@interface MZNHRouletteLayer : CCLayerColor
 {
     CCSprite *receptor;
     CCSprite * selSprite;

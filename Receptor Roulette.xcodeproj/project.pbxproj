@@ -124,13 +124,13 @@
 		9BAF41FA1379F6FA0007BC91 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF41F91379F6FA0007BC91 /* main.m */; };
 		9BAF41FD1379F6FA0007BC91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF41FC1379F6FA0007BC91 /* AppDelegate.m */; };
 		9BAF42001379F6FA0007BC91 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF41FF1379F6FA0007BC91 /* RootViewController.m */; };
-		9BAF42031379F6FA0007BC91 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */; };
 		9BE14046138230EB004A18C4 /* APC.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14045138230EB004A18C4 /* APC.png */; };
 		9BE14049138233E7004A18C4 /* Tc_TG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14048138233E7004A18C4 /* Tc_TG.png */; };
 		9BE14053138238F2004A18C4 /* APC_TB.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14050138238F1004A18C4 /* APC_TB.png */; };
 		9BE1405913823945004A18C4 /* APC_SP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405613823944004A18C4 /* APC_SP.png */; };
 		9BE1405A13823945004A18C4 /* APC_TG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405713823944004A18C4 /* APC_TG.png */; };
 		9BE1405B13823945004A18C4 /* APC_TP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405813823944004A18C4 /* APC_TP.png */; };
+		9BAF42031379F6FA0007BC91 /* MZNHRouletteLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF42021379F6FA0007BC91 /* MZNHRouletteLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -369,8 +369,8 @@
 		9BAF41FC1379F6FA0007BC91 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9BAF41FE1379F6FA0007BC91 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		9BAF41FF1379F6FA0007BC91 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		9BAF42011379F6FA0007BC91 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		9BAF42011379F6FA0007BC91 /* MZNHRouletteLayer.h */ = {isa = PBXFileReference; path = MZNHRouletteLayer.h; sourceTree = "<group>"; };
+		9BAF42021379F6FA0007BC91 /* MZNHRouletteLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZNHRouletteLayer.m; sourceTree = "<group>"; };
 		9BAF42041379F6FA0007BC91 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		9BE14045138230EB004A18C4 /* APC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC.png; sourceTree = "<group>"; };
 		9BE14048138233E7004A18C4 /* Tc_TG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_TG.png; sourceTree = "<group>"; };
@@ -455,8 +455,8 @@
 				9BAF41FC1379F6FA0007BC91 /* AppDelegate.m */,
 				9BAF41FE1379F6FA0007BC91 /* RootViewController.h */,
 				9BAF41FF1379F6FA0007BC91 /* RootViewController.m */,
-				9BAF42011379F6FA0007BC91 /* HelloWorldLayer.h */,
-				9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */,
+				9BAF42011379F6FA0007BC91 /* MZNHRouletteLayer.h */,
+				9BAF42021379F6FA0007BC91 /* MZNHRouletteLayer.m */,
 				9BAF42041379F6FA0007BC91 /* GameConfig.h */,
 				9BAF40B11379F6F80007BC91 /* Resources */,
 				9BAF41F71379F6FA0007BC91 /* Supporting Files */,
@@ -917,7 +917,7 @@
 				9BAF41FA1379F6FA0007BC91 /* main.m in Sources */,
 				9BAF41FD1379F6FA0007BC91 /* AppDelegate.m in Sources */,
 				9BAF42001379F6FA0007BC91 /* RootViewController.m in Sources */,
-				9BAF42031379F6FA0007BC91 /* HelloWorldLayer.m in Sources */,
+				9BAF42031379F6FA0007BC91 /* MZNHRouletteLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

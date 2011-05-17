@@ -8,10 +8,10 @@
 
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "MZNHRouletteLayer.h"
 
 // HelloWorldLayer implementation
-@implementation HelloWorldLayer
+@implementation MZNHRouletteLayer
 
 +(CCScene *) scene
 {
@@ -19,7 +19,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	MZNHRouletteLayer *layer = [MZNHRouletteLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -92,7 +92,7 @@
             [self addChild:sprite];
             [movableSprites addObject:sprite];
         }
-        //[images release];
+
 	}
 	return self;
 }
@@ -120,7 +120,11 @@
 }
 
 -(CGFloat)angleAtPosition:(CGPoint)position {
-	return -35*cos(position.x*M_PI/320)+350*pow(M_E, position.y*-.014);
+	if (abs(160 - position.y) < 2) {
+		return 0.0;
+	} else {
+		return 90 * (atanf((600 - position.x) / (160 - position.y)) + M_PI * (abs(position.y-160)/(position.y-160))/2);
+	}
 }
 
 // handles movement
