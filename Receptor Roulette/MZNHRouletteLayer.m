@@ -34,48 +34,43 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super initWithColor:ccc4(120, 225, 255, 255)])) {
+        tcellSprites = [[NSMutableArray alloc] init];
+        receptorSprites = [[NSMutableArray alloc] init];
+        
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        receptor = [CCSprite spriteWithFile:@"APC.png"];
-        receptor.scale = .40;
-        receptor.position = ccp(590, size.height/2);
-        //receptor.position = ccp(240, size.height/2);
+        
         CCLabelTTF *score = [CCLabelTTF labelWithString:@"Score: 143" fontName:@"Helvetica" fontSize:15];
         score.position = ccp(50, 300);
         [self addChild:score];
         
-        
+        receptor = [CCSprite spriteWithFile:@"APC.png"];
+        receptor.scale = .40;
+        receptor.position = ccp(590, size.height/2);
+        [self addChild:receptor];
         
         NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
                            @"APC_TG.png",
                            @"APC_TP.png",
+                           @"APC_TB.png",
                            @"APC_SP.png",
+                           @"APC_TB.png",
                            @"APC_TP.png",
                            @"APC_TG.png", nil];       
-        for(int i = 0; i < images.count; ++i) {
+        for(int i = 0; i < [images count]; ++i) {
             NSString *image = [images objectAtIndex:i];
             CCSprite *sprite = [CCSprite spriteWithFile:image];
-            //float offsetFraction = ((float)(i+1))/(images.count+1);
             
+            float angle = i* M_PI * 2 / [images count];
+            float radius = receptor.contentSize.width/2;
             sprite.scale = 2;
-            
-            //sprite.rotation = [self angleAtPosition:sprite.position];
+
             [receptor addChild:sprite];
-            sprite.position = ccp(100, 100);
-            //[movableSprites addObject:sprite];
+            sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));//ccp(50*cos(angle), 50*sin(angle));
+            sprite.rotation = 180 + -180 * angle / M_PI;
+            [receptorSprites addObject:sprite];
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        [self addChild:receptor];
-        NSLog(@"AP: (%f,%f)", receptor.anchorPoint.x,receptor.anchorPoint.y);
-        
-        movableSprites = [[NSMutableArray alloc] init];
+         
         images = [NSArray arrayWithObjects:@"Tc_TG.png",
                            @"Tc_TG.png",
                            @"Tc_TG.png",
@@ -90,7 +85,7 @@
             sprite.scale = .7;
             sprite.rotation = [self angleAtPosition:sprite.position];
             [self addChild:sprite];
-            [movableSprites addObject:sprite];
+            [tcellSprites addObject:sprite];
         }
 
 	}
@@ -101,7 +96,7 @@
 // Finds sprite that has been touched
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
     CCSprite * newSprite = nil;
-    for (CCSprite *sprite in movableSprites) {
+    for (CCSprite *sprite in tcellSprites) {
         if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {            
             newSprite = sprite;
             break;
@@ -117,6 +112,9 @@
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [self selectSpriteForTouch:touchLocation];      
     return TRUE;    
+}
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+	selSprite = nil;
 }
 
 -(CGFloat)angleAtPosition:(CGPoint)position {
@@ -140,30 +138,20 @@
     oldTouchLocation = [self convertToNodeSpace:oldTouchLocation];
     
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);    
-    [self panForTranslation:translation];    
+    [self panForTranslation:translation];  
 }
-
-/*- (void)ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-    UITouch* touch = [touches anyObject];
-    CGPoint location = [self convertTouchToNodeSpace:touch];
-    CGRect spriteRect = planet1.boundingBox;
-    if(CGRectContainsPoint(spriteRect, location)) {
-        // particularSprite touched
-        NSLog(@"touched planet1");
-    }
-}*/
 
 - (void) update: (ccTime) dt
 {
 	CGSize size = [[CCDirector sharedDirector] winSize];
     receptor.rotation -= .3;
     //receptor.position = ccp(receptor.position.x+.2, receptor.position.y);
-	for (CCSprite * cell in movableSprites) {
-		cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+	for (CCSprite * cell in tcellSprites) {
+		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
 		
 		if (cell.position.x >= (size.width + cell.contentSize.width)) {
-			[movableSprites removeObject: cell];
+			[tcellSprites removeObject: cell];
 			[self removeChild: cell cleanup:YES];
 		}
 	}
@@ -181,7 +169,7 @@
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 0.7 ];
 		[cell runAction: scaleAction];
-		[movableSprites addObject: cell];
+		[tcellSprites addObject: cell];
 		[self addChild: cell];
 	}
 }
@@ -208,8 +196,8 @@
 	// cocos2d will automatically release all the children (Label)
 	
 	// don't forget to call "super dealloc"
-    [movableSprites release];
-    movableSprites = nil;
+    [tcellSprites release];
+    tcellSprites = nil;
 	[super dealloc];
 }
 @end

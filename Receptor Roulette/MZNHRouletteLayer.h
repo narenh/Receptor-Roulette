@@ -15,7 +15,8 @@
 {
     CCSprite *receptor;
     CCSprite * selSprite;
-    NSMutableArray * movableSprites;
+    NSMutableArray * tcellSprites;
+    NSMutableArray * receptorSprites;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
