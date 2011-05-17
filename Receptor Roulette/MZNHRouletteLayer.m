@@ -40,28 +40,6 @@
         receptor.scale = 8;
         receptor.position = ccp(720, size.height/2);
         [self addChild:receptor];
-        
-        
-        movableSprites = [[NSMutableArray alloc] init];
-        NSArray *images = [NSArray arrayWithObjects:@"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png", nil];       
-        for(int i = 0; i < images.count; ++i) {
-            NSString *image = [images objectAtIndex:i];
-            CCSprite *sprite = [CCSprite spriteWithFile:image];
-            float offsetFraction = ((float)(i+1))/(images.count+1);
-            sprite.position = ccp(size.width*offsetFraction, random()%310);
-            sprite.scale = .75;
-            sprite.rotation = [self angleAtPosition:sprite.position];
-            [self addChild:sprite];
-            [movableSprites addObject:sprite];
-        }
 	}
 	return self;
 }
