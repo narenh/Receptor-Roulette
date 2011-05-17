@@ -20,6 +20,7 @@
 		9B262A6F1382C6BF008223EF /* Tc_TG_.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A641382C6BF008223EF /* Tc_TG_.png */; };
 		9B262A701382C6BF008223EF /* Tc_TP_.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A651382C6BF008223EF /* Tc_TP_.png */; };
 		9B262A711382C6BF008223EF /* Tc_TP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A661382C6BF008223EF /* Tc_TP.png */; };
+		0AA9B98D1382C1AD00D88320 /* CCSprite+getBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA9B98C1382C1AD00D88320 /* CCSprite+getBounds.m */; };
 		9B311B3C137C2A26000FB18A /* T-Cell_Draft1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */; };
 		9BAF40A11379F6F80007BC91 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAF40A01379F6F80007BC91 /* QuartzCore.framework */; };
 		9BAF40A31379F6F80007BC91 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAF40A21379F6F80007BC91 /* OpenGLES.framework */; };
@@ -158,6 +159,8 @@
 		9B262A641382C6BF008223EF /* Tc_TG_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_TG_.png; sourceTree = "<group>"; };
 		9B262A651382C6BF008223EF /* Tc_TP_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_TP_.png; sourceTree = "<group>"; };
 		9B262A661382C6BF008223EF /* Tc_TP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_TP.png; sourceTree = "<group>"; };
+		0AA9B98B1382C1AD00D88320 /* CCSprite+getBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+getBounds.h"; sourceTree = "<group>"; };
+		0AA9B98C1382C1AD00D88320 /* CCSprite+getBounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+getBounds.m"; sourceTree = "<group>"; };
 		9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "T-Cell_Draft1.png"; path = "../T-Cell_Draft1.png"; sourceTree = "<group>"; };
 		9BAF409C1379F6F80007BC91 /* Receptor Roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Receptor Roulette.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAF40A01379F6F80007BC91 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -511,6 +514,8 @@
 				9BAF41FF1379F6FA0007BC91 /* RootViewController.m */,
 				9BAF42011379F6FA0007BC91 /* MZNHRouletteLayer.h */,
 				9BAF42021379F6FA0007BC91 /* MZNHRouletteLayer.m */,
+				0AA9B98B1382C1AD00D88320 /* CCSprite+getBounds.h */,
+				0AA9B98C1382C1AD00D88320 /* CCSprite+getBounds.m */,
 				9BAF42041379F6FA0007BC91 /* GameConfig.h */,
 				9BAF40B11379F6F80007BC91 /* Resources */,
 				9BAF41F71379F6FA0007BC91 /* Supporting Files */,
@@ -978,6 +983,7 @@
 				9BAF41FD1379F6FA0007BC91 /* AppDelegate.m in Sources */,
 				9BAF42001379F6FA0007BC91 /* RootViewController.m in Sources */,
 				9BAF42031379F6FA0007BC91 /* MZNHRouletteLayer.m in Sources */,
+				0AA9B98D1382C1AD00D88320 /* CCSprite+getBounds.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

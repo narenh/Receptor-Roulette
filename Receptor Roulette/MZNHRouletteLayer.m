@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
+#import "CCSprite+getBounds.h"
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
