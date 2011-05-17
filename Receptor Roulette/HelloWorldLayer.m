@@ -36,32 +36,63 @@
 	if( (self=[super initWithColor:ccc4(120, 225, 255, 255)])) {
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        receptor = [CCSprite spriteWithFile:@"Receptor.png"];
-        receptor.scale = 8;
-        receptor.position = ccp(720, size.height/2);
-        [self addChild:receptor];
+        receptor = [CCSprite spriteWithFile:@"APC.png"];
+        receptor.scale = .40;
+        receptor.position = ccp(590, size.height/2);
+        //receptor.position = ccp(240, size.height/2);
+        CCLabelTTF *score = [CCLabelTTF labelWithString:@"Score: 143" fontName:@"Helvetica" fontSize:15];
+        score.position = ccp(50, 300);
+        [self addChild:score];
         
+        
+        
+        NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
+                           @"APC_TG.png",
+                           @"APC_TP.png",
+                           @"APC_SP.png",
+                           @"APC_TP.png",
+                           @"APC_TG.png", nil];       
+        for(int i = 0; i < images.count; ++i) {
+            NSString *image = [images objectAtIndex:i];
+            CCSprite *sprite = [CCSprite spriteWithFile:image];
+            //float offsetFraction = ((float)(i+1))/(images.count+1);
+            
+            sprite.scale = 2;
+            
+            //sprite.rotation = [self angleAtPosition:sprite.position];
+            [receptor addChild:sprite];
+            sprite.position = ccp(100, 100);
+            //[movableSprites addObject:sprite];
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        [self addChild:receptor];
+        NSLog(@"AP: (%f,%f)", receptor.anchorPoint.x,receptor.anchorPoint.y);
         
         movableSprites = [[NSMutableArray alloc] init];
-        NSArray *images = [NSArray arrayWithObjects:@"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png",
-                           @"T-Cell_Draft1.png", nil];       
+        images = [NSArray arrayWithObjects:@"Tc_TG.png",
+                           @"Tc_TG.png",
+                           @"Tc_TG.png",
+                           @"Tc_TG.png",
+                           @"Tc_TG.png",
+                           @"Tc_TG.png", nil];       
         for(int i = 0; i < images.count; ++i) {
             NSString *image = [images objectAtIndex:i];
             CCSprite *sprite = [CCSprite spriteWithFile:image];
             float offsetFraction = ((float)(i+1))/(images.count+1);
             sprite.position = ccp(size.width*offsetFraction, random()%310);
-            sprite.scale = .75;
+            sprite.scale = .7;
             sprite.rotation = [self angleAtPosition:sprite.position];
             [self addChild:sprite];
             [movableSprites addObject:sprite];
         }
+        //[images release];
 	}
 	return self;
 }
@@ -125,7 +156,8 @@
 - (void) update: (ccTime) dt
 {
 	CGSize size = [[CCDirector sharedDirector] winSize];
-
+    receptor.rotation -= .3;
+    //receptor.position = ccp(receptor.position.x+.2, receptor.position.y);
 	for (CCSprite * cell in movableSprites) {
 		cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
@@ -141,13 +173,13 @@
 {
 	// FIXME: Add increasing probabilities based on total time passed
 	if (arc4random() & 1) {
-		CCSprite * cell = [CCSprite spriteWithFile: @"T-Cell_Draft1.png"];
+		CCSprite * cell = [CCSprite spriteWithFile: @"Tc_TG.png"];
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
 							(size.height - cell.contentSize.height * 2)
 							+ cell.contentSize.height );
 		cell.scale = 0.0;
-		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 1.0 ];
+		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 0.7 ];
 		[cell runAction: scaleAction];
 		[movableSprites addObject: cell];
 		[self addChild: cell];

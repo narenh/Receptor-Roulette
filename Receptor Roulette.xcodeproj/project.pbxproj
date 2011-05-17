@@ -125,6 +125,12 @@
 		9BAF41FD1379F6FA0007BC91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF41FC1379F6FA0007BC91 /* AppDelegate.m */; };
 		9BAF42001379F6FA0007BC91 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF41FF1379F6FA0007BC91 /* RootViewController.m */; };
 		9BAF42031379F6FA0007BC91 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */; };
+		9BE14046138230EB004A18C4 /* APC.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14045138230EB004A18C4 /* APC.png */; };
+		9BE14049138233E7004A18C4 /* Tc_TG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14048138233E7004A18C4 /* Tc_TG.png */; };
+		9BE14053138238F2004A18C4 /* APC_TB.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE14050138238F1004A18C4 /* APC_TB.png */; };
+		9BE1405913823945004A18C4 /* APC_SP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405613823944004A18C4 /* APC_SP.png */; };
+		9BE1405A13823945004A18C4 /* APC_TG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405713823944004A18C4 /* APC_TG.png */; };
+		9BE1405B13823945004A18C4 /* APC_TP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1405813823944004A18C4 /* APC_TP.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -366,6 +372,12 @@
 		9BAF42011379F6FA0007BC91 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		9BAF42021379F6FA0007BC91 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		9BAF42041379F6FA0007BC91 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		9BE14045138230EB004A18C4 /* APC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC.png; sourceTree = "<group>"; };
+		9BE14048138233E7004A18C4 /* Tc_TG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_TG.png; sourceTree = "<group>"; };
+		9BE14050138238F1004A18C4 /* APC_TB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_TB.png; sourceTree = "<group>"; };
+		9BE1405613823944004A18C4 /* APC_SP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_SP.png; sourceTree = "<group>"; };
+		9BE1405713823944004A18C4 /* APC_TG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_TG.png; sourceTree = "<group>"; };
+		9BE1405813823944004A18C4 /* APC_TP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_TP.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +467,12 @@
 		9BAF40B11379F6F80007BC91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BE1405613823944004A18C4 /* APC_SP.png */,
+				9BE1405713823944004A18C4 /* APC_TG.png */,
+				9BE1405813823944004A18C4 /* APC_TP.png */,
+				9BE14050138238F1004A18C4 /* APC_TB.png */,
+				9BE14045138230EB004A18C4 /* APC.png */,
+				9BE14048138233E7004A18C4 /* Tc_TG.png */,
 				9B311B38137C26BC000FB18A /* Planet1.png */,
 				9B311B3D137C3CF2000FB18A /* Receptor.png */,
 				9B311B3B137C2A26000FB18A /* T-Cell_Draft1.png */,
@@ -786,6 +804,12 @@
 				9B311B39137C26BC000FB18A /* Planet1.png in Resources */,
 				9B311B3C137C2A26000FB18A /* T-Cell_Draft1.png in Resources */,
 				9B311B3E137C3CF2000FB18A /* Receptor.png in Resources */,
+				9BE14046138230EB004A18C4 /* APC.png in Resources */,
+				9BE14049138233E7004A18C4 /* Tc_TG.png in Resources */,
+				9BE14053138238F2004A18C4 /* APC_TB.png in Resources */,
+				9BE1405913823945004A18C4 /* APC_SP.png in Resources */,
+				9BE1405A13823945004A18C4 /* APC_TG.png in Resources */,
+				9BE1405B13823945004A18C4 /* APC_TP.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
