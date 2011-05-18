@@ -50,7 +50,7 @@
         [self addChild:score];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
-        apc.color = ccc3(100, 255, 100);
+        apc.color = ccc3(255, 100, 100);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
@@ -75,8 +75,9 @@
             float radius = apc.contentSize.width/2 + 20;
             sprite.scale = TCELL_SCALE/APC_SCALE;*/
 
-		NSArray * peptides = [[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
-							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]];
+		NSArray * peptides = [[[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
+							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]]
+                              arrayByAddingObjectsFromArray:[MZNHAPCReceptorSprite peptideNames]];
         for(int i = 0; i < [peptides count]; ++i) {
 			MZNHAPCReceptorSprite * sprite = [MZNHAPCReceptorSprite receptorSpriteWithPeptide: [peptides objectAtIndex: i]];
 
@@ -187,7 +188,7 @@
 				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
 					if (selSprite == cell) selSprite = nil;
 					// Dangerous: we are looping through the same array
-					cell.color = ccc3(200, 0, 0);
+					cell.color = ccc3(0, 200, 0);
                     CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
                     [cell runAction:scaleAction];
                     [tcellSprites removeObject:cell];
