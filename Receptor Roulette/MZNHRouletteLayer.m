@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
 #import "MZNHTCellSprite.h"
+#import "MZNHAPCReceptorSprite.h"
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
@@ -50,19 +51,13 @@
         receptor.position = ccp(590, size.height/2);
         [self addChild:receptor];
         
-        NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
-                           @"APC_TG.png",
-                           @"APC_TP.png",
-                           @"APC_TB.png",
-                           @"APC_SP.png",
-                           @"APC_TB.png",
-                           @"APC_TP.png",
-                           @"APC_TG.png", nil];       
-        for(int i = 0; i < [images count]; ++i) {
-            NSString *image = [images objectAtIndex:i];
-            CCSprite *sprite = [CCSprite spriteWithFile:image];
-            
-            float angle = i* M_PI * 2 / [images count];
+
+		NSArray * peptides = [[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
+							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]];
+        for(int i = 0; i < [peptides count]; ++i) {
+			MZNHAPCReceptorSprite * sprite = [MZNHAPCReceptorSprite receptorSpriteWithPeptide: [peptides objectAtIndex: i]];
+
+            float angle = i* M_PI * 2 / [peptides count];
             float radius = receptor.contentSize.width/2;
             sprite.scale = 2;
 
@@ -70,23 +65,6 @@
             sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));//ccp(50*cos(angle), 50*sin(angle));
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
-        }
-         
-        images = [NSArray arrayWithObjects:@"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png", nil];       
-        for(int i = 0; i < images.count; ++i) {
-            NSString *image = [images objectAtIndex:i];
-            CCSprite *sprite = [CCSprite spriteWithFile:image];
-            float offsetFraction = ((float)(i+1))/(images.count+1);
-            sprite.position = ccp(size.width*offsetFraction, random()%310);
-            sprite.scale = .7;
-            sprite.rotation = [self angleAtPosition:sprite.position];
-            [self addChild:sprite];
-            [tcellSprites addObject:sprite];
         }
 
 	}
@@ -162,7 +140,9 @@
 			[tcellSprites removeObject: cell];
 			[self removeChild: cell cleanup:YES];
 		} else {
-			for (CCSprite * rec in receptorSprites) {
+			for (MZNHAPCReceptorSprite * rec in receptorSprites) {
+				if (![rec.peptide isEqualToString: cell.peptide])
+					continue;
 				CGRect recBox = rec.boundingBox;
 				recBox.origin = [rec.parent convertToWorldSpace: rec.position];
 				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
@@ -179,7 +159,7 @@
 
 - (void) spawnTCell: (ccTime) dt {
 	// FIXME: Add increasing probabilities based on total time passed
-	if (arc4random() & 1) {
+	if (random() & 1) {
 		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 0.7 ];

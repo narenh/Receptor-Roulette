@@ -1,5 +1,5 @@
 //
-//  MZNHTCell.h
+//  MZNHAPCReceptor.h
 //  Receptor Roulette
 //
 //  Created by Michael Victor Zink on 5/17/11.
@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface MZNHTCellSprite : CCSprite {
+@interface MZNHAPCReceptorSprite : CCSprite {
     NSString * peptide;
 }
 
 @property(nonatomic, retain) NSString * peptide;
 
-+ (MZNHTCellSprite *) randomTCellSprite;
++ (MZNHAPCReceptorSprite *) receptorSpriteWithPeptide: (NSString *) peptideName;
 + (NSArray *) peptideNames;
 
 @end

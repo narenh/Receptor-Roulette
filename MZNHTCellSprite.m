@@ -8,7 +8,8 @@
 
 #import "MZNHTCellSprite.h"
 
-static NSArray * spriteImages = nil;
+static NSString * spriteFilenameFormat = @"TC_%@.png";
+static NSArray * peptideNames = nil;
 
 @implementation MZNHTCellSprite
 
@@ -16,9 +17,10 @@ static NSArray * spriteImages = nil;
 
 + (MZNHTCellSprite *) randomTCellSprite
 {
-	NSUInteger i = random() % ([spriteImages count]-1);
-	MZNHTCellSprite * cell = [MZNHTCellSprite spriteWithFile: [spriteImages objectAtIndex:i]];
-	cell.peptide = i;
+	NSUInteger i = random() % ([[MZNHTCellSprite peptideNames] count]-1);
+	NSString * peptideName = [[MZNHTCellSprite peptideNames] objectAtIndex: i];
+	MZNHTCellSprite * cell = [MZNHTCellSprite spriteWithFile: [NSString stringWithFormat: spriteFilenameFormat, peptideName]];
+	cell.peptide = peptideName;
 	CGSize size = [[CCDirector sharedDirector] winSize];
 	cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
 						(size.height - cell.contentSize.height * 2)
@@ -26,16 +28,11 @@ static NSArray * spriteImages = nil;
 	return cell;
 }
 
-+ (void) initialize
++ (NSArray *) peptideNames
 {
-	if (! spriteImages) {
-		spriteImages = [[NSArray alloc] initWithObjects:@"TC_SB.png", @"TC_SB_.png",
-						@"TC_SB.png", @"TC_SB_.png",
-						@"TC_SB.png", @"TC_SB_.png",
-						@"TC_TB.png", @"TC_TB_.png",
-						@"TC_TG.png", @"TC_TG_.png",
-						@"TC_TP.png", @"TC_TP_.png", nil];
-	}
+	if (! peptideNames)
+		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"TB", @"TG", @"TP", nil];
+	return peptideNames;
 }
 
 @end
