@@ -22,5 +22,6 @@
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 -(CGFloat)angleAtPosition:(CGPoint)position;
+- (void)spawnTCell:(ccTime)dt;
 
 @end

@@ -48,6 +48,7 @@
         [self addChild:score];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
+        apc.color = ccc3(100, 255, 100);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
@@ -57,15 +58,19 @@
                            @"APC_TP.png",
                            @"APC_TB.png",
                            @"APC_SP.png",
-                           @"APC_TB.png",
+                           @"APC_SG.png",
                            @"APC_TP.png",
-                           @"APC_TG.png", nil];       
+                           @"APC_TB.png",
+                           @"APC_SP.png",
+                           @"APC_SB.png",
+                           @"APC_TP.png",
+                           @"APC_SB.png", nil];       
         for(int i = 0; i < [images count]; ++i) {
             NSString *image = [images objectAtIndex:i];
             CCSprite *sprite = [CCSprite spriteWithFile:image];
             
             float angle = i* M_PI * 2 / [images count];
-            float radius = apc.contentSize.width/2;
+            float radius = apc.contentSize.width/2 + 20;
             sprite.scale = TCELL_SCALE/APC_SCALE;
 
             [apc addChild:sprite];
@@ -73,7 +78,6 @@
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
-         
         images = [NSArray arrayWithObjects:@"Tc_TG.png",
                            @"Tc_TG.png",
                            @"Tc_TG.png",
@@ -123,7 +127,7 @@
         selSprite.color = ccc3(200, 0, 0);
         CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
 		[selSprite runAction:scaleAction];
-        [tcellSprites removeObject: selSprite];
+        [tcellSprites removeObject:selSprite];
     }
 	selSprite = nil;
 }
@@ -152,26 +156,29 @@
     [self panForTranslation:translation];  
 }
 
-- (void)update:(ccTime)dt
-{
+- (void)update:(ccTime)dt {
 	CGSize size = [[CCDirector sharedDirector] winSize];
-    apc.rotation -= .3/5;
-	for (CCSprite * cell in tcellSprites) {
+    apc.rotation -= .3;
+	for (CCSprite *cell in tcellSprites) {
 		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
 		
 		if (cell.position.x >= (size.width + cell.contentSize.width)) {
 			[tcellSprites removeObject: cell];
 			[self removeChild: cell cleanup:YES];
-		} else {
-			for (CCSprite * rec in receptorSprites) {
+		}
+        else {
+			for (CCSprite *rec in receptorSprites) {
 				CGRect recBox = rec.boundingBox;
-				recBox.origin = [rec.parent convertToWorldSpace: rec.position];
+				recBox.origin = [rec.parent convertToWorldSpace:rec.position];
 				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
 					if (selSprite == cell) selSprite = nil;
 					// Dangerous: we are looping through the same array
-					[tcellSprites removeObject: cell];
-					[self removeChild: cell cleanup: YES];
+					cell.color = ccc3(200, 0, 0);
+                    CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
+                    [cell runAction:scaleAction];
+                    [tcellSprites removeObject:cell];
+					//[self removeChild:cell cleanup: YES];
 					break;
 				}
 			}
@@ -188,10 +195,10 @@
                        @"TC_TP.png", @"TC_TP_.png", nil];
     float i = random() % ([images count]-1);
 	// FIXME: Add increasing probabilities based on total time passed
-	if (arc4random() & 1) {
+	if (random() & 1) {
 		CCSprite * cell = [CCSprite spriteWithFile: [images objectAtIndex:i]];
 		CGSize size = [[CCDirector sharedDirector] winSize];
-		cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
+		cell.position = ccp(0.0, ((float)random()/(2.0*RAND_MAX)) *
 							(size.height - cell.contentSize.height * 2)
 							+ cell.contentSize.height );
 		cell.scale = 0.0;
@@ -202,13 +209,13 @@
 	}
 }
 
-- (void) onEnter {
+- (void)onEnter {
 	[super onEnter];
 	[self scheduleUpdate];
 	[self schedule: @selector(spawnTCell:) interval: 1.0];
 }
 
-- (void) onExit {
+- (void)onExit {
 	[self unscheduleUpdate];
 	[self unschedule: @selector(spawnTCell:)];
 	[super onExit];
