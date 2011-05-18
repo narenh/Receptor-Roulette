@@ -163,6 +163,18 @@
 		if (cell.position.x >= (size.width + cell.contentSize.width)) {
 			[tcellSprites removeObject: cell];
 			[self removeChild: cell cleanup:YES];
+		} else {
+			for (CCSprite * rec in receptorSprites) {
+				CGRect recBox = rec.boundingBox;
+				recBox.origin = [rec.parent convertToWorldSpace: rec.position];
+				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
+					if (selSprite == cell) selSprite = nil;
+					// Dangerous: we are looping through the same array
+					[tcellSprites removeObject: cell];
+					[self removeChild: cell cleanup: YES];
+					break;
+				}
+			}
 		}
 	}
 }
