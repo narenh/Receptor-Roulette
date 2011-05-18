@@ -205,7 +205,7 @@
  
  @since v0.99.5
  */ 
-#define CC_RETINA_DISPLAY_FILENAME_SUFFIX @"-hd"
+#define CC_RETINA_DISPLAY_FILENAME_SUFFIX @""
 
 /** @def CC_USE_RGBA32_LABELS_ON_NEON_ARCH
  If enabled, it will use RGBA8888 (32-bit textures) on Neon devices for CCLabelTTF objects.

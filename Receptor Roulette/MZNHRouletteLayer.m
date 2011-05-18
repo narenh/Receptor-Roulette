@@ -44,13 +44,13 @@
         
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        
+        NSLog(@"WinSize: %@",NSStringFromCGSize(size));
         scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"SCORE: %d",score] fontName:@"Futura-Medium" fontSize:20];
         scoreLabel.position = ccp(60, 300);
         [self addChild:scoreLabel];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
-        apc.color = ccc3(255, 100, 100);
+        apc.color = ccc3(150, 50, 255);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
