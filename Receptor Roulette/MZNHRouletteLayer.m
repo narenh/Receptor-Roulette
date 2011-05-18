@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
+#import "MZNHTCellSprite.h"
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
@@ -153,7 +154,7 @@
 {
 	CGSize size = [[CCDirector sharedDirector] winSize];
     receptor.rotation -= .3;
-	for (CCSprite * cell in tcellSprites) {
+	for (MZNHTCellSprite * cell in tcellSprites) {
 		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
 		
@@ -177,20 +178,9 @@
 }
 
 - (void) spawnTCell: (ccTime) dt {
-    NSArray *images = [NSArray arrayWithObjects:@"TC_SB.png", @"TC_SB_.png",
-                       @"TC_SB.png", @"TC_SB_.png",
-                       @"TC_SB.png", @"TC_SB_.png",
-                       @"TC_TB.png", @"TC_TB_.png",
-                       @"TC_TG.png", @"TC_TG_.png",
-                       @"TC_TP.png", @"TC_TP_.png", nil];
-    float i = random() % ([images count]-1);
 	// FIXME: Add increasing probabilities based on total time passed
 	if (arc4random() & 1) {
-		CCSprite * cell = [CCSprite spriteWithFile: [images objectAtIndex:i]];
-		CGSize size = [[CCDirector sharedDirector] winSize];
-		cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
-							(size.height - cell.contentSize.height * 2)
-							+ cell.contentSize.height );
+		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 0.7 ];
 		[cell runAction: scaleAction];
