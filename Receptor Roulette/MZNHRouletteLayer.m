@@ -50,7 +50,8 @@
         [self addChild:scoreLabel];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
-        apc.color = ccc3(150, 50, 255);
+        //apc.color = ccc3(150, 50, 255);
+        apc.color = ccc3(0, 0, 255);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
