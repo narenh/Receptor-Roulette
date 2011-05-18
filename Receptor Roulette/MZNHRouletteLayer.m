@@ -9,6 +9,9 @@
 
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
+#define TCELL_SCALE 0.7
+#define APC_SCALE 0.4
+
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
@@ -44,10 +47,10 @@
         score.position = ccp(50, 300);
         [self addChild:score];
         
-        receptor = [CCSprite spriteWithFile:@"APC.png"];
-        receptor.scale = .40;
-        receptor.position = ccp(590, size.height/2);
-        [self addChild:receptor];
+        apc = [CCSprite spriteWithFile:@"APC.png"];
+        apc.scale = APC_SCALE;
+        apc.position = ccp(590, size.height/2);
+        [self addChild:apc];
         
         NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
                            @"APC_TG.png",
@@ -62,10 +65,10 @@
             CCSprite *sprite = [CCSprite spriteWithFile:image];
             
             float angle = i* M_PI * 2 / [images count];
-            float radius = receptor.contentSize.width/2;
-            sprite.scale = 2;
+            float radius = apc.contentSize.width/2;
+            sprite.scale = TCELL_SCALE/APC_SCALE;
 
-            [receptor addChild:sprite];
+            [apc addChild:sprite];
             sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));//ccp(50*cos(angle), 50*sin(angle));
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
@@ -125,12 +128,8 @@
 	selSprite = nil;
 }
 
--(CGFloat)angleAtPosition:(CGPoint)position {
-	if (abs(160 - position.y) < 2) {
-		return 0.0;
-	} else {
-		return 70 * (atanf((600 - position.x) / (160 - position.y)) + M_PI * (abs(position.y-160)/(position.y-160))/2);
-	}
+- (CGFloat)angleAtPosition:(CGPoint)position {
+    return -35*cos(position.y*M_PI/320)+350*pow(M_E, position.x*-.014);
 }
 
 // handles movement
@@ -153,10 +152,10 @@
     [self panForTranslation:translation];  
 }
 
-- (void) update: (ccTime) dt
+- (void)update:(ccTime)dt
 {
 	CGSize size = [[CCDirector sharedDirector] winSize];
-    receptor.rotation -= .3;
+    apc.rotation -= .3/5;
 	for (CCSprite * cell in tcellSprites) {
 		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
@@ -168,7 +167,7 @@
 	}
 }
 
-- (void) spawnTCell: (ccTime) dt {
+- (void)spawnTCell:(ccTime)dt {
     NSArray *images = [NSArray arrayWithObjects:@"TC_SB.png", @"TC_SB_.png",
                        @"TC_SB.png", @"TC_SB_.png",
                        @"TC_SB.png", @"TC_SB_.png",
@@ -184,22 +183,20 @@
 							(size.height - cell.contentSize.height * 2)
 							+ cell.contentSize.height );
 		cell.scale = 0.0;
-		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale: 0.7 ];
+		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
 		[tcellSprites addObject: cell];
 		[self addChild: cell];
 	}
 }
 
-- (void) onEnter
-{
+- (void) onEnter {
 	[super onEnter];
 	[self scheduleUpdate];
 	[self schedule: @selector(spawnTCell:) interval: 1.0];
 }
 
-- (void) onExit
-{
+- (void) onExit {
 	[self unscheduleUpdate];
 	[self unschedule: @selector(spawnTCell:)];
 	[super onExit];

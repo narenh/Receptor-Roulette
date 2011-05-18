@@ -13,7 +13,7 @@
 // HelloWorldLayer
 @interface MZNHRouletteLayer : CCLayerColor
 {
-    CCSprite *receptor;
+    CCSprite *apc;
     CCSprite * selSprite;
     NSMutableArray * tcellSprites;
     NSMutableArray * receptorSprites;
