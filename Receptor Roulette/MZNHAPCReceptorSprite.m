@@ -26,7 +26,7 @@ static NSArray * peptideNames = nil;
 + (NSArray *) peptideNames
 {
 	if (! peptideNames) {
-		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"TB", @"TG", @"TP", nil];
+		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"SG", @"SP", @"TB", @"TG", @"TP", nil];
 	}
 	return peptideNames;
 }

@@ -9,14 +9,18 @@
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
+#import "MZNHTCellSprite.h"
+#import "MZNHAPCReceptorSprite.h"
 
 // HelloWorldLayer
 @interface MZNHRouletteLayer : CCLayerColor
 {
-    CCSprite *apc;
-    CCSprite * selSprite;
-    NSMutableArray * tcellSprites;
-    NSMutableArray * receptorSprites;
+    int score;
+    CCLabelTTF *scoreLabel;
+    MZNHAPCReceptorSprite *apc;
+    MZNHTCellSprite *selSprite;
+    NSMutableArray *tcellSprites;
+    NSMutableArray *receptorSprites;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

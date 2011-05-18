@@ -9,8 +9,7 @@
 
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
-#import "MZNHTCellSprite.h"
-#import "MZNHAPCReceptorSprite.h"
+
 
 #define TCELL_SCALE 0.7
 #define APC_SCALE 0.4
@@ -41,71 +40,36 @@
 	if( (self=[super initWithColor:ccc4(120, 225, 255, 255)])) {
         tcellSprites = [[NSMutableArray alloc] init];
         receptorSprites = [[NSMutableArray alloc] init];
+        score = 0;
         
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCLabelTTF *score = [CCLabelTTF labelWithString:@"Score: 143" fontName:@"Helvetica" fontSize:15];
-        score.position = ccp(50, 300);
-        [self addChild:score];
+        scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"SCORE: %d",score] fontName:@"Futura-Medium" fontSize:20];
+        scoreLabel.position = ccp(60, 300);
+        [self addChild:scoreLabel];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
         apc.color = ccc3(255, 100, 100);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
-        
-       /* NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
-                           @"APC_TG.png",
-                           @"APC_TP.png",
-                           @"APC_TB.png",
-                           @"APC_SP.png",
-                           @"APC_SG.png",
-                           @"APC_TP.png",
-                           @"APC_TB.png",
-                           @"APC_SP.png",
-                           @"APC_SB.png",
-                           @"APC_TP.png",
-                           @"APC_SB.png", nil];       
-        for(int i = 0; i < [images count]; ++i) {
-            NSString *image = [images objectAtIndex:i];
-            CCSprite *sprite = [CCSprite spriteWithFile:image];
-            
-            float angle = i* M_PI * 2 / [images count];
-            float radius = apc.contentSize.width/2 + 20;
-            sprite.scale = TCELL_SCALE/APC_SCALE;*/
 
 		NSArray * peptides = [[[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
 							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]]
                               arrayByAddingObjectsFromArray:[MZNHAPCReceptorSprite peptideNames]];
         for(int i = 0; i < [peptides count]; ++i) {
-			MZNHAPCReceptorSprite * sprite = [MZNHAPCReceptorSprite receptorSpriteWithPeptide: [peptides objectAtIndex: i]];
+			MZNHAPCReceptorSprite *sprite = [MZNHAPCReceptorSprite receptorSpriteWithPeptide:[peptides objectAtIndex:i]];
 
             float angle = i* M_PI * 2 / [peptides count];
             float radius = apc.contentSize.width/2;
-            sprite.scale = 2;
+            sprite.scale = TCELL_SCALE/APC_SCALE;
 
             [apc addChild:sprite];
-            sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));//ccp(50*cos(angle), 50*sin(angle));
+            sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
-        /*images = [NSArray arrayWithObjects:@"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png",
-                           @"Tc_TG.png", nil];       
-        for(int i = 0; i < images.count; ++i) {
-            NSString *image = [images objectAtIndex:i];
-            CCSprite *sprite = [CCSprite spriteWithFile:image];
-            float offsetFraction = ((float)(i+1))/(images.count+1);
-            sprite.position = ccp(size.width*offsetFraction, random()%310);
-            sprite.scale = .7;
-            sprite.rotation = [self angleAtPosition:sprite.position];
-            [self addChild:sprite];
-            [tcellSprites addObject:sprite];
-        }*/
 	}
 	return self;
 }
@@ -113,8 +77,8 @@
 
 // Finds sprite that has been touched
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
-    CCSprite * newSprite = nil;
-    for (CCSprite *sprite in tcellSprites) {
+    MZNHTCellSprite *newSprite = nil;
+    for (MZNHTCellSprite *sprite in tcellSprites) {
         if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {            
             newSprite = sprite;
             break;
@@ -125,24 +89,33 @@
     }
 }
 
+- (void)removeCell:(MZNHTCellSprite *)cell dirty:(BOOL)dirty {
+    if (dirty) cell.color = ccc3(200, 0, 0);
+    else cell.color = ccc3(0, 200, 0);
+    CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
+    [cell runAction:scaleAction];
+    [tcellSprites removeObject:cell];
+    if (dirty) score--;
+    else score++;
+}
+
 //On touchDownInside, 'selects' sprite
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event { 
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [self selectSpriteForTouch:touchLocation];      
     return TRUE;    
 }
+//Handles double tap
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     if (touch.tapCount == 2) {
         [self selectSpriteForTouch:touchLocation];
-        selSprite.color = ccc3(200, 0, 0);
-        CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
-		[selSprite runAction:scaleAction];
-        [tcellSprites removeObject:selSprite];
+        [self removeCell:selSprite dirty:!selSprite.bad];
     }
 	selSprite = nil;
 }
 
+//Returns the angle a sprite should be facing at a point
 - (CGFloat)angleAtPosition:(CGPoint)position {
     return -35*cos(position.y*M_PI/320)+350*pow(M_E, position.x*-.014);
 }
@@ -166,55 +139,46 @@
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);    
     [self panForTranslation:translation];  
 }
+- (BOOL)handleMatch:(MZNHTCellSprite *)cell {
+    for (MZNHAPCReceptorSprite *rec in receptorSprites) {
+        if ([rec.peptide isEqualToString:[cell.peptide substringToIndex:2]]) {
+            CGRect recBox = rec.boundingBox;
+            recBox.origin = [rec.parent convertToWorldSpace:rec.position];
+            if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
+                if (selSprite == cell) selSprite = nil;
+                [self removeCell:cell dirty:NO];
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
 
 - (void)update:(ccTime)dt {
 	CGSize size = [[CCDirector sharedDirector] winSize];
+    CGRect apcBounds = apc.boundingBox;
+    
     apc.rotation -= .3;
+    [scoreLabel setString:[NSString stringWithFormat:@"SCORE: %d",score]];
+    
 	for (MZNHTCellSprite *cell in tcellSprites) {
-		if(selSprite != cell) {
-            cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
-            cell.rotation = [self angleAtPosition: cell.position];
+        // T-Cell Motion
+        cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+        cell.rotation = [self angleAtPosition: cell.position];
+        if (cell.position.x >= (size.width + cell.contentSize.width)) {
+            [tcellSprites removeObject: cell];
+            [self removeChild: cell cleanup:YES];
+            break;
         }
-		
-		else if (cell.position.x >= (size.width + cell.contentSize.width)) {
-			[tcellSprites removeObject: cell];
-			[self removeChild: cell cleanup:YES];
-		}
-        else {
-			for (MZNHAPCReceptorSprite * rec in receptorSprites) {
-				if (![rec.peptide isEqualToString: cell.peptide]) continue;
-				CGRect recBox = rec.boundingBox;
-				recBox.origin = [rec.parent convertToWorldSpace:rec.position];
-				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
-					if (selSprite == cell) selSprite = nil;
-					// Dangerous: we are looping through the same array
-					cell.color = ccc3(0, 200, 0);
-                    CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
-                    [cell runAction:scaleAction];
-                    [tcellSprites removeObject:cell];
-					//[self removeChild:cell cleanup: YES];
-					break;
-				}
-			}
-		}
+        //T-Cell Intersection
+        if (CGRectIntersectsRect(cell.boundingBox, apcBounds) && cell.bad) {
+            [self removeCell:cell dirty:YES];
+            break;
+        }
+        if([self handleMatch:cell]) break;
 	}
 }
 
-/*- (void)spawnTCell:(ccTime)dt {
-    NSArray *images = [NSArray arrayWithObjects:@"TC_SB.png", @"TC_SB_.png",
-                       @"TC_SB.png", @"TC_SB_.png",
-                       @"TC_SB.png", @"TC_SB_.png",
-                       @"TC_TB.png", @"TC_TB_.png",
-                       @"TC_TG.png", @"TC_TG_.png",
-                       @"TC_TP.png", @"TC_TP_.png", nil];
-    float i = random() % ([images count]-1);
-	// FIXME: Add increasing probabilities based on total time passed
-	if (random() & 1) {
-		CCSprite * cell = [CCSprite spriteWithFile: [images objectAtIndex:i]];
-		CGSize size = [[CCDirector sharedDirector] winSize];
-		cell.position = ccp(0.0, ((float)random()/(2.0*RAND_MAX)) *
-							(size.height - cell.contentSize.height * 2)
-							+ cell.contentSize.height );*/
 - (void) spawnTCell: (ccTime) dt {
 	// FIXME: Add increasing probabilities based on total time passed
 	if (random() & 1) {
