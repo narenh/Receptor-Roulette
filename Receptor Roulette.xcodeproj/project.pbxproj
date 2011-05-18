@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AA47E46138349CD00817168 /* MZNHTCellSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA47E45138349CD00817168 /* MZNHTCellSprite.m */; };
 		0AA47E4A13834EE200817168 /* MZNHAPCReceptorSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */; };
+		9B19B07C1384679000EEA05E /* MZNHTCellSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */; };
 		9B262A5A1382C696008223EF /* APC_SB.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A581382C696008223EF /* APC_SB.png */; };
 		9B262A5B1382C696008223EF /* APC_SG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A591382C696008223EF /* APC_SG.png */; };
 		9B262A671382C6BF008223EF /* Tc_SB_.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B262A5C1382C6BF008223EF /* Tc_SB_.png */; };
@@ -147,10 +147,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0AA47E44138349CD00817168 /* MZNHTCellSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZNHTCellSprite.h; path = ../MZNHTCellSprite.h; sourceTree = "<group>"; };
-		0AA47E45138349CD00817168 /* MZNHTCellSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZNHTCellSprite.m; path = ../MZNHTCellSprite.m; sourceTree = "<group>"; };
 		0AA47E4813834EE200817168 /* MZNHAPCReceptorSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHAPCReceptorSprite.h; sourceTree = "<group>"; };
 		0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHAPCReceptorSprite.m; sourceTree = "<group>"; };
+		9B19B07A1384679000EEA05E /* MZNHTCellSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHTCellSprite.h; sourceTree = "<group>"; };
+		9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHTCellSprite.m; sourceTree = "<group>"; };
 		9B262A581382C696008223EF /* APC_SB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_SB.png; sourceTree = "<group>"; };
 		9B262A591382C696008223EF /* APC_SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = APC_SG.png; sourceTree = "<group>"; };
 		9B262A5C1382C6BF008223EF /* Tc_SB_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tc_SB_.png; sourceTree = "<group>"; };
@@ -519,8 +519,8 @@
 				9BAF42021379F6FA0007BC91 /* MZNHRouletteLayer.m */,
 				0AA47E4813834EE200817168 /* MZNHAPCReceptorSprite.h */,
 				0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */,
-				0AA47E44138349CD00817168 /* MZNHTCellSprite.h */,
-				0AA47E45138349CD00817168 /* MZNHTCellSprite.m */,
+				9B19B07A1384679000EEA05E /* MZNHTCellSprite.h */,
+				9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */,
 				9BAF42041379F6FA0007BC91 /* GameConfig.h */,
 				9BAF40B11379F6F80007BC91 /* Resources */,
 				9BAF41F71379F6FA0007BC91 /* Supporting Files */,
@@ -988,8 +988,8 @@
 				9BAF41FD1379F6FA0007BC91 /* AppDelegate.m in Sources */,
 				9BAF42001379F6FA0007BC91 /* RootViewController.m in Sources */,
 				9BAF42031379F6FA0007BC91 /* MZNHRouletteLayer.m in Sources */,
-				0AA47E46138349CD00817168 /* MZNHTCellSprite.m in Sources */,
 				0AA47E4A13834EE200817168 /* MZNHAPCReceptorSprite.m in Sources */,
+				9B19B07C1384679000EEA05E /* MZNHTCellSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
