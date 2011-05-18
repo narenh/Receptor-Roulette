@@ -457,10 +457,10 @@
 				9B262A611382C6BF008223EF /* Tc_SP.png */,
 				9B262A621382C6BF008223EF /* Tc_TB_.png */,
 				9B262A631382C6BF008223EF /* Tc_TB.png */,
+				9BE14048138233E7004A18C4 /* Tc_TG.png */,
 				9B262A641382C6BF008223EF /* Tc_TG_.png */,
 				9B262A651382C6BF008223EF /* Tc_TP_.png */,
 				9B262A661382C6BF008223EF /* Tc_TP.png */,
-				9BE14048138233E7004A18C4 /* Tc_TG.png */,
 			);
 			name = "T-Cells";
 			sourceTree = "<group>";

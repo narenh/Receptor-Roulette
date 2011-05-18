@@ -108,12 +108,20 @@
 }
 
 //On touchDownInside, 'selects' sprite
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {    
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event { 
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [self selectSpriteForTouch:touchLocation];      
     return TRUE;    
 }
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+    if (touch.tapCount == 2) {
+        [self selectSpriteForTouch:touchLocation];
+        selSprite.color = ccc3(200, 0, 0);
+        CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
+		[selSprite runAction:scaleAction];
+        [tcellSprites removeObject: selSprite];
+    }
 	selSprite = nil;
 }
 
@@ -145,7 +153,6 @@
 {
 	CGSize size = [[CCDirector sharedDirector] winSize];
     receptor.rotation -= .3;
-    //receptor.position = ccp(receptor.position.x+.2, receptor.position.y);
 	for (CCSprite * cell in tcellSprites) {
 		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
 		cell.rotation = [self angleAtPosition: cell.position];
@@ -169,11 +176,17 @@
 	}
 }
 
-- (void) spawnTCell: (ccTime) dt
-{
+- (void) spawnTCell: (ccTime) dt {
+    NSArray *images = [NSArray arrayWithObjects:@"TC_SB.png", @"TC_SB_.png",
+                       @"TC_SB.png", @"TC_SB_.png",
+                       @"TC_SB.png", @"TC_SB_.png",
+                       @"TC_TB.png", @"TC_TB_.png",
+                       @"TC_TG.png", @"TC_TG_.png",
+                       @"TC_TP.png", @"TC_TP_.png", nil];
+    float i = random() % ([images count]-1);
 	// FIXME: Add increasing probabilities based on total time passed
 	if (arc4random() & 1) {
-		CCSprite * cell = [CCSprite spriteWithFile: @"Tc_TG.png"];
+		CCSprite * cell = [CCSprite spriteWithFile: [images objectAtIndex:i]];
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
 							(size.height - cell.contentSize.height * 2)
