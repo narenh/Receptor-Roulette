@@ -9,9 +9,11 @@
 
 // Import the interfaces
 #import "MZNHRouletteLayer.h"
+#import "MZNHTCellSprite.h"
+#import "MZNHAPCReceptorSprite.h"
+
 #define TCELL_SCALE 0.7
 #define APC_SCALE 0.4
-
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
@@ -48,12 +50,12 @@
         [self addChild:score];
         
         apc = [CCSprite spriteWithFile:@"APC.png"];
-        apc.color = ccc3(100, 255, 100);
+        apc.color = ccc3(255, 100, 100);
         apc.scale = APC_SCALE;
         apc.position = ccp(590, size.height/2);
         [self addChild:apc];
         
-        NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
+       /* NSArray *images = [NSArray arrayWithObjects:@"APC_SP.png",
                            @"APC_TG.png",
                            @"APC_TP.png",
                            @"APC_TB.png",
@@ -71,14 +73,24 @@
             
             float angle = i* M_PI * 2 / [images count];
             float radius = apc.contentSize.width/2 + 20;
-            sprite.scale = TCELL_SCALE/APC_SCALE;
+            sprite.scale = TCELL_SCALE/APC_SCALE;*/
+
+		NSArray * peptides = [[[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
+							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]]
+                              arrayByAddingObjectsFromArray:[MZNHAPCReceptorSprite peptideNames]];
+        for(int i = 0; i < [peptides count]; ++i) {
+			MZNHAPCReceptorSprite * sprite = [MZNHAPCReceptorSprite receptorSpriteWithPeptide: [peptides objectAtIndex: i]];
+
+            float angle = i* M_PI * 2 / [peptides count];
+            float radius = apc.contentSize.width/2;
+            sprite.scale = 2;
 
             [apc addChild:sprite];
             sprite.position = ccp(radius + radius*cos(angle),radius + radius*sin(angle));//ccp(50*cos(angle), 50*sin(angle));
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
-        images = [NSArray arrayWithObjects:@"Tc_TG.png",
+        /*images = [NSArray arrayWithObjects:@"Tc_TG.png",
                            @"Tc_TG.png",
                            @"Tc_TG.png",
                            @"Tc_TG.png",
@@ -93,8 +105,7 @@
             sprite.rotation = [self angleAtPosition:sprite.position];
             [self addChild:sprite];
             [tcellSprites addObject:sprite];
-        }
-
+        }*/
 	}
 	return self;
 }
@@ -159,22 +170,25 @@
 - (void)update:(ccTime)dt {
 	CGSize size = [[CCDirector sharedDirector] winSize];
     apc.rotation -= .3;
-	for (CCSprite *cell in tcellSprites) {
-		if(selSprite != cell) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
-		cell.rotation = [self angleAtPosition: cell.position];
+	for (MZNHTCellSprite *cell in tcellSprites) {
+		if(selSprite != cell) {
+            cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+            cell.rotation = [self angleAtPosition: cell.position];
+        }
 		
-		if (cell.position.x >= (size.width + cell.contentSize.width)) {
+		else if (cell.position.x >= (size.width + cell.contentSize.width)) {
 			[tcellSprites removeObject: cell];
 			[self removeChild: cell cleanup:YES];
 		}
         else {
-			for (CCSprite *rec in receptorSprites) {
+			for (MZNHAPCReceptorSprite * rec in receptorSprites) {
+				if (![rec.peptide isEqualToString: cell.peptide]) continue;
 				CGRect recBox = rec.boundingBox;
 				recBox.origin = [rec.parent convertToWorldSpace:rec.position];
 				if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
 					if (selSprite == cell) selSprite = nil;
 					// Dangerous: we are looping through the same array
-					cell.color = ccc3(200, 0, 0);
+					cell.color = ccc3(0, 200, 0);
                     CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
                     [cell runAction:scaleAction];
                     [tcellSprites removeObject:cell];
@@ -186,7 +200,7 @@
 	}
 }
 
-- (void)spawnTCell:(ccTime)dt {
+/*- (void)spawnTCell:(ccTime)dt {
     NSArray *images = [NSArray arrayWithObjects:@"TC_SB.png", @"TC_SB_.png",
                        @"TC_SB.png", @"TC_SB_.png",
                        @"TC_SB.png", @"TC_SB_.png",
@@ -200,7 +214,11 @@
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		cell.position = ccp(0.0, ((float)random()/(2.0*RAND_MAX)) *
 							(size.height - cell.contentSize.height * 2)
-							+ cell.contentSize.height );
+							+ cell.contentSize.height );*/
+- (void) spawnTCell: (ccTime) dt {
+	// FIXME: Add increasing probabilities based on total time passed
+	if (random() & 1) {
+		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
