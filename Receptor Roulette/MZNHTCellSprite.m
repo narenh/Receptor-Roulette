@@ -30,6 +30,7 @@ static NSArray * peptideNames = nil;
 						+ cell.contentSize.height );
     if (random()%20 < 4) {
         cell.autoreactive = YES;
+		cell.functional = NO;
         cell.color = ccc3(255, 120, 0);
     }
 	return cell;

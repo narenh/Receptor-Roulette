@@ -97,7 +97,7 @@
     [cell runAction:scaleAction];
     [tcellSprites removeObject:cell];
     if (dirty) score--;
-    else score++;
+    else score += 2;
 }
 
 //On touchDownInside, 'selects' sprite
@@ -111,7 +111,13 @@
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     if (touch.tapCount == 2) {
         [self selectSpriteForTouch:touchLocation];
-        [self removeCell:selSprite dirty:!selSprite.autoreactive];
+		BOOL dirty;
+		if (selSprite.autoreactive) {
+			dirty = NO;
+		} else {
+			dirty = selSprite.functional;
+		}
+        [self removeCell:selSprite dirty: dirty];
     }
 	selSprite = nil;
 }
