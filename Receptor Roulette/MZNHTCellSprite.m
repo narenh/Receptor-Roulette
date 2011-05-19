@@ -8,33 +8,37 @@
 
 #import "MZNHTCellSprite.h"
 
-static NSString * spriteFilenameFormat = @"TC_%@.png";
+static NSString * spriteFilenameFormat = @"TC_%@%@.png";
 static NSArray * peptideNames = nil;
 
 @implementation MZNHTCellSprite
 
-@synthesize peptide, bad;
+@synthesize peptide, autoreactive, functional;
 
 + (MZNHTCellSprite *) randomTCellSprite {
 	NSUInteger i = random() % ([[MZNHTCellSprite peptideNames] count]-1);
 	NSString * peptideName = [[MZNHTCellSprite peptideNames] objectAtIndex: i];
-	MZNHTCellSprite * cell = [MZNHTCellSprite spriteWithFile: [NSString stringWithFormat: spriteFilenameFormat, peptideName]];
+	BOOL functional = (random() & 1) ? YES : NO;
+	MZNHTCellSprite * cell = [MZNHTCellSprite spriteWithFile:
+							  [NSString stringWithFormat: spriteFilenameFormat,
+							   peptideName, (functional ? @"" : @"_")]];
 	cell.peptide = peptideName;
+	cell.functional = functional;
 	CGSize size = [[CCDirector sharedDirector] winSize];
 	cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
 						(size.height - cell.contentSize.height * 2)
 						+ cell.contentSize.height );
     if (random()%20 < 4) {
-        cell.bad = YES;
+        cell.autoreactive = YES;
         cell.color = ccc3(255, 120, 0);
-    } 
+    }
 	return cell;
 }
 
 + (NSArray *) peptideNames
 {
 	if (! peptideNames)
-		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"SG", @"SP", @"TB", @"TG", @"TP", @"SB_", @"SG_", @"SP_", @"TB_", @"TG_", @"TP_", nil];
+		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"SG", @"SP", @"TB", @"TG", @"TP", nil];
 	return peptideNames;
 }
 

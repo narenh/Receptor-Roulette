@@ -11,11 +11,13 @@
 
 @interface MZNHTCellSprite : CCSprite {
     NSString * peptide;
-    BOOL bad;
+    BOOL autoreactive;
+	BOOL functional;
 }
 
 @property(nonatomic, retain) NSString *peptide;
-@property(readwrite) BOOL bad;
+@property(nonatomic) BOOL autoreactive;
+@property(nonatomic) BOOL functional;
 
 + (MZNHTCellSprite *) randomTCellSprite;
 + (NSArray *) peptideNames;

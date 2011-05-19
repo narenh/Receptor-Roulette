@@ -111,7 +111,7 @@
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     if (touch.tapCount == 2) {
         [self selectSpriteForTouch:touchLocation];
-        [self removeCell:selSprite dirty:!selSprite.bad];
+        [self removeCell:selSprite dirty:!selSprite.autoreactive];
     }
 	selSprite = nil;
 }
@@ -142,15 +142,13 @@
 }
 - (BOOL)handleMatch:(MZNHTCellSprite *)cell {
     for (MZNHAPCReceptorSprite *rec in receptorSprites) {
-        if ([rec.peptide isEqualToString:[cell.peptide substringToIndex:2]]) {
-            CGRect recBox = rec.boundingBox;
-            recBox.origin = [rec.parent convertToWorldSpace:rec.position];
-            if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
-                if (selSprite == cell) selSprite = nil;
-                [self removeCell:cell dirty:NO];
-                return YES;
-            }
-        }
+		CGRect recBox = rec.boundingBox;
+		recBox.origin = [rec.parent convertToWorldSpace:rec.position];
+		if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
+			if (selSprite == cell) selSprite = nil;
+			[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
+			return YES;
+		}
     }
     return NO;
 }
@@ -172,7 +170,7 @@
             break;
         }
         //T-Cell Intersection
-        if (CGRectIntersectsRect(cell.boundingBox, apcBounds) && cell.bad) {
+        if (CGRectIntersectsRect(cell.boundingBox, apcBounds) && cell.autoreactive) {
             [self removeCell:cell dirty:YES];
             break;
         }
