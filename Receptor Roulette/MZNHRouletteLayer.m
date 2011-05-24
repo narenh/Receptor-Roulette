@@ -198,23 +198,15 @@
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
 		[tcellSprites addObject: cell];
-        //CCSprite *bounds = [[CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithTexture:[CCTexture2D  rect:
-        CCSprite *sprite = [CCSprite node];
 		
 		[self addChild: cell];
-        //NSLog(@"bounding box: %@", NSStringFromCGRect(CGRectMake(0,0,cell.boundingBox.size.width,cell.boundingBox.size.height)));
-        [sprite setTextureRect:CGRectMake(0,0,cell.contentSize.width,cell.contentSize.height)];
-		[sprite setColor:ccGRAY];
-		[sprite setOpacity:128];
-        sprite.position = CGPointMake(cell.contentSize.width/2, cell.contentSize.height/2);
-        [cell addChild:sprite];
 	}
 }
 
 - (void)onEnter {
 	[super onEnter];
 	[self scheduleUpdate];
-	[self schedule: @selector(spawnTCell:) interval: 1.5];
+	[self schedule: @selector(spawnTCell:) interval: 1.2];
 }
 
 - (void)onExit {
