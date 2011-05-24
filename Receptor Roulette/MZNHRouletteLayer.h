@@ -21,6 +21,7 @@
     MZNHTCellSprite *selSprite;
     NSMutableArray *tcellSprites;
     NSMutableArray *receptorSprites;
+    float apcRadius;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
