@@ -8,7 +8,7 @@
 
 #import "MZNHTCellSprite.h"
 
-static NSString * spriteFilenameFormat = @"TC_%@%@.png";
+static NSString * spriteFilenameFormat = @"MZNH_TC_%@%@.png";
 static NSArray * peptideNames = nil;
 
 @implementation MZNHTCellSprite

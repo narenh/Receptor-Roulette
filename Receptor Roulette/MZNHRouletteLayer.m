@@ -12,7 +12,7 @@
 
 
 #define TCELL_SCALE 0.7
-#define APC_SCALE 0.4
+#define APC_SCALE 0.50
 
 // HelloWorldLayer implementation
 @implementation MZNHRouletteLayer
@@ -44,20 +44,18 @@
         
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        NSLog(@"WinSize: %@",NSStringFromCGSize(size));
         scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"SCORE: %d",score] fontName:@"Futura-Medium" fontSize:20];
         scoreLabel.position = ccp(60, 300);
         [self addChild:scoreLabel];
         
-        apc = [CCSprite spriteWithFile:@"APC.png"];
+        apc = [CCSprite spriteWithFile:@"MZNH_APC.png"];
         //apc.color = ccc3(150, 50, 255);
         apc.color = ccc3(150, 0, 200);
         apc.scale = APC_SCALE;
-        apc.position = ccp(590, size.height/2);
+        apc.position = ccp(660, size.height/2);
         apcRadius = apc.boundingBox.size.width/2;
         
         [self addChild:apc];
-        NSLog(@"APC: %@\nChildren: %@",NSStringFromCGRect(apc.boundingBox),apc.children);
         
 		NSArray * peptides = [[[NSArray arrayWithArray:[MZNHAPCReceptorSprite peptideNames]]
 							  arrayByAddingObjectsFromArray: [MZNHAPCReceptorSprite peptideNames]]
@@ -74,7 +72,6 @@
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
-        NSLog(@"APC: %@\nChildren: %@",NSStringFromCGRect(apc.boundingBox),apc.children);
 	}
 	return self;
 }
@@ -150,11 +147,12 @@
     CGPoint translation = ccpSub(touchLocation, oldTouchLocation);    
     [self panForTranslation:translation];  
 }
-- (BOOL)handleMatch:(MZNHTCellSprite *)cell {
+
+- (BOOL)tCellCollidesWithReceptor:(MZNHTCellSprite *)cell {
     for (MZNHAPCReceptorSprite *rec in receptorSprites) {
-		CGRect recBox = rec.boundingBox;
-		recBox.origin = [rec.parent convertToWorldSpace:rec.position];
-		if (CGRectIntersectsRect(cell.boundingBox, recBox)) {
+        float dist = ccpDistance([rec.parent convertToWorldSpace:rec.position], cell.position);
+        float collision = rec.contentSize.width/2 + cell.contentSize.height/2;
+		if (dist < collision) {
 			if (selSprite == cell) selSprite = nil;
 			[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
 			return YES;
@@ -163,38 +161,16 @@
     return NO;
 }
 
-- (BOOL)circle:(CGPoint)origin withRadius:(float)radius withCircle:(CGPoint)origin2 withRadius2:(float)radius2 {
-    float dx = origin.x - origin2.x;
-	float dy = origin.y - origin2.y;
-    
-	float distance = sqrt((dx*dx)+(dy*dy));
-    
-	if(distance <= (radius+radius2)) return YES;
-    
-	return NO;
-}
 - (BOOL)tCellCollidesWithAPC:(MZNHTCellSprite *)cell {
-    
-    //
-    CGRect bb = cell.boundingBox;
-    CGPoint point = CGPointMake(bb.origin.x+bb.size.width,bb.origin.y+bb.size.height/2);
-    float dx = point.x - apc.position.x;
-    float dy = point.y - apc.position.y;
-    float distance = sqrt( (dx*dx)+(dy*dy) );
-    
-    NSLog(@"\nAPC: %@\nPOINT: %@\nDISTANCE: %f\nRADIUS: %f",NSStringFromCGPoint(apc.position),NSStringFromCGPoint(point),distance,apc.boundingBox.size.width/2);
-    if (distance < (apc.boundingBox.size.width/2 - 20)) {
-        NSLog(@"COLLISION WITH APC!");
+    if (ccpDistance(cell.position, apc.position) < apcRadius+20) {
+        [self removeCell:cell dirty:YES];
         return YES;
     }
-	else return NO;
+    return NO;
 }
 
 - (void)update:(ccTime)dt {
 	CGSize size = [[CCDirector sharedDirector] winSize];
-    CGRect apcBounds = apc.boundingBox;
-    apcBounds.origin.x += 15;
-    //NSLog(@"APC: %@",NSStringFromCGRect(apcBounds));
     apc.rotation -= .3;
     [scoreLabel setString:[NSString stringWithFormat:@"SCORE: %d",score]];
     
@@ -207,12 +183,10 @@
             [self removeChild: cell cleanup:YES];
             break;
         }
+        
         //T-Cell Intersection
-        if ([self tCellCollidesWithAPC:cell] && cell.autoreactive) {
-            [self removeCell:cell dirty:YES];
-            break;
-        }
-        if([self handleMatch:cell]) break;
+        if ([self tCellCollidesWithAPC:cell]) break;
+        if([self tCellCollidesWithReceptor:cell]) break;
 	}
 }
 
@@ -224,14 +198,23 @@
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
 		[tcellSprites addObject: cell];
+        //CCSprite *bounds = [[CCSprite spriteWithSpriteFrame:[CCSpriteFrame frameWithTexture:[CCTexture2D  rect:
+        CCSprite *sprite = [CCSprite node];
+		
 		[self addChild: cell];
+        //NSLog(@"bounding box: %@", NSStringFromCGRect(CGRectMake(0,0,cell.boundingBox.size.width,cell.boundingBox.size.height)));
+        [sprite setTextureRect:CGRectMake(0,0,cell.contentSize.width,cell.contentSize.height)];
+		[sprite setColor:ccGRAY];
+		[sprite setOpacity:128];
+        sprite.position = CGPointMake(cell.contentSize.width/2, cell.contentSize.height/2);
+        [cell addChild:sprite];
 	}
 }
 
 - (void)onEnter {
 	[super onEnter];
 	[self scheduleUpdate];
-	[self schedule: @selector(spawnTCell:) interval: 3.0];
+	[self schedule: @selector(spawnTCell:) interval: 1.5];
 }
 
 - (void)onExit {

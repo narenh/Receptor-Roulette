@@ -8,7 +8,7 @@
 
 #import "MZNHAPCReceptorSprite.h"
 
-static NSString * spriteFilenameFormat = @"APC_%@.png";
+static NSString * spriteFilenameFormat = @"MZNH_APC_%@.png";
 static NSArray * peptideNames = nil;
 
 @implementation MZNHAPCReceptorSprite
