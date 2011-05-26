@@ -175,8 +175,10 @@
     [scoreLabel setString:[NSString stringWithFormat:@"SCORE: %d",score]];
     
 	for (MZNHTCellSprite *cell in tcellSprites) {
-        // T-Cell Motion
-        cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+		// T-Cell Motion
+		if (cell != selSprite) {
+			cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+		}
         cell.rotation = [self angleAtPosition: cell.position];
         if (cell.position.x >= (size.width + cell.contentSize.width)) {
             [tcellSprites removeObject: cell];
