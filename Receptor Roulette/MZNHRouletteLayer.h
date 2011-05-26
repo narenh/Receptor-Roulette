@@ -12,6 +12,7 @@
 #import "CGPointExtension.h"
 #import "MZNHTCellSprite.h"
 #import "MZNHAPCReceptorSprite.h"
+#import <AudioToolbox/AudioServices.h>
 
 // HelloWorldLayer
 @interface MZNHRouletteLayer : CCLayerColor
@@ -23,6 +24,7 @@
     NSMutableArray *tcellSprites;
     NSMutableArray *receptorSprites;
     float apcRadius;
+	SystemSoundID popSoundID;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

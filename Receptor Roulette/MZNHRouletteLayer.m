@@ -72,6 +72,11 @@
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
+
+		// Add audio sound
+		CFBundleRef bundle = CFBundleGetMainBundle();
+		CFURLRef res = CFBundleCopyResourceURL(bundle, CFSTR("Pop1"), CFSTR("wav"), NULL);
+		AudioServicesCreateSystemSoundID(res, &popSoundID);
 	}
 	return self;
 }
@@ -98,7 +103,10 @@
     [cell runAction:scaleAction];
     [tcellSprites removeObject:cell];
     if (dirty) score--;
-    else score += 2;
+    else {
+		score += 2;
+		AudioServicesPlaySystemSound(popSoundID);
+	}
 }
 
 //On touchDownInside, 'selects' sprite

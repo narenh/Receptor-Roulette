@@ -13,6 +13,7 @@
 		0A2A1CA6138E99D2001DE97C /* MZNH_Tc_TG.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A1CA0138E99D2001DE97C /* MZNH_Tc_TG.png */; };
 		0A2A1CA7138E99D2001DE97C /* MZNH_Tc_TP_.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A1CA1138E99D2001DE97C /* MZNH_Tc_TP_.png */; };
 		0A2A1CA8138E99D2001DE97C /* MZNH_Tc_TP.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A1CA2138E99D2001DE97C /* MZNH_Tc_TP.png */; };
+		0A2A1CAB138EA426001DE97C /* Pop1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0A2A1CAA138EA426001DE97C /* Pop1.wav */; };
 		0AA47E4A13834EE200817168 /* MZNHAPCReceptorSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */; };
 		9B19B07C1384679000EEA05E /* MZNHTCellSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */; };
 		9BAF40A11379F6F80007BC91 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAF40A01379F6F80007BC91 /* QuartzCore.framework */; };
@@ -152,6 +153,7 @@
 		0A2A1CA0138E99D2001DE97C /* MZNH_Tc_TG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MZNH_Tc_TG.png; sourceTree = "<group>"; };
 		0A2A1CA1138E99D2001DE97C /* MZNH_Tc_TP_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MZNH_Tc_TP_.png; sourceTree = "<group>"; };
 		0A2A1CA2138E99D2001DE97C /* MZNH_Tc_TP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MZNH_Tc_TP.png; sourceTree = "<group>"; };
+		0A2A1CAA138EA426001DE97C /* Pop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pop1.wav; sourceTree = "<group>"; };
 		0AA47E4813834EE200817168 /* MZNHAPCReceptorSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHAPCReceptorSprite.h; sourceTree = "<group>"; };
 		0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHAPCReceptorSprite.m; sourceTree = "<group>"; };
 		9B19B07A1384679000EEA05E /* MZNHTCellSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHTCellSprite.h; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 		9BAF40B11379F6F80007BC91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A2A1CAA138EA426001DE97C /* Pop1.wav */,
 				9B19B07D1384682600EEA05E /* Cocos2d Images */,
 				9B262A571382C65E008223EF /* T-Cells */,
 				9B262A561382C652008223EF /* Receptors */,
@@ -884,6 +887,7 @@
 				0A2A1CA6138E99D2001DE97C /* MZNH_Tc_TG.png in Resources */,
 				0A2A1CA7138E99D2001DE97C /* MZNH_Tc_TP_.png in Resources */,
 				0A2A1CA8138E99D2001DE97C /* MZNH_Tc_TP.png in Resources */,
+				0A2A1CAB138EA426001DE97C /* Pop1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
