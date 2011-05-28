@@ -210,7 +210,7 @@
 
 - (void) spawnTCell: (ccTime) dt {
 	// FIXME: Add increasing probabilities based on total time passed
-	//if (random() & 1) {
+	if (random() & 1) {
 		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
@@ -218,7 +218,7 @@
 		[tcellSprites addObject: cell];
 		
 		[self addChild: cell];
-	//}
+	}
 }
 
 - (void)onEnter {
