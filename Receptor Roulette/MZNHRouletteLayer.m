@@ -154,7 +154,18 @@
         float collision = rec.contentSize.width/2 + cell.contentSize.height/2;
 		if (dist < collision) {
 			if (selSprite == cell) selSprite = nil;
-			[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
+            if (cell.functional && [cell.peptide isEqualToString:rec.peptide]) {
+                [tcellSprites removeObject:cell];
+                MZNHTCellSprite *newSprite = [MZNHTCellSprite spriteWithTexture:[cell texture]];
+                newSprite.position = CGPointMake(-30, rec.contentSize.height/2);
+                [self removeChild:cell cleanup:YES];
+                [rec addChild:newSprite];
+                break;
+            }
+            else {
+                [self removeCell:cell dirty:YES];
+            }
+			//[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
 			return YES;
 		}
     }
@@ -188,6 +199,11 @@
         if ([self tCellCollidesWithAPC:cell]) break;
         if([self tCellCollidesWithReceptor:cell]) break;
 	}
+    for (MZNHAPCReceptorSprite *rec in receptorSprites) {
+        CGPoint recPos = [rec.parent convertToWorldSpace:rec.position];
+        if (rec.children != NULL && recPos.x > 500 ) [rec removeAllChildrenWithCleanup:YES];
+                                               
+    }
 }
 
 - (void) spawnTCell: (ccTime) dt {
