@@ -94,8 +94,10 @@
 - (void)removeCell:(MZNHTCellSprite *)cell dirty:(BOOL)dirty {
     if (dirty) cell.color = ccc3(200, 0, 0);
     else cell.color = ccc3(0, 200, 0);
-    CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
+    CCAction *scaleAction = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:.9],
+                             [CCScaleTo actionWithDuration:0.4 scale:0], nil];
     [cell runAction:scaleAction];
+
     [tcellSprites removeObject:cell];
     if (dirty) score--;
     else score += 2;
@@ -152,7 +154,7 @@
     for (MZNHAPCReceptorSprite *rec in receptorSprites) {
         float dist = ccpDistance([rec.parent convertToWorldSpace:rec.position], cell.position);
         float collision = rec.contentSize.width/2 + cell.contentSize.height/2;
-		if (dist < collision) {
+		if (dist < collision - 20) {
 			if (selSprite == cell) selSprite = nil;
             if (cell.functional && [cell.peptide isEqualToString:rec.peptide]) {
                 [tcellSprites removeObject:cell];
@@ -160,12 +162,12 @@
                 newSprite.position = CGPointMake(-30, rec.contentSize.height/2);
                 [self removeChild:cell cleanup:YES];
                 [rec addChild:newSprite];
+                score += 2;
                 break;
             }
             else {
                 [self removeCell:cell dirty:YES];
             }
-			//[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
 			return YES;
 		}
     }
