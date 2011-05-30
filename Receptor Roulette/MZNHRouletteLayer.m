@@ -90,7 +90,8 @@
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
     MZNHTCellSprite *newSprite = nil;
     for (MZNHTCellSprite *sprite in [self arrangedTCellSprites]) {
-        if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {            
+        float dist = ccpDistance(sprite.position, touchLocation);
+		if (dist < (sprite.contentSize.width/2) - 20) {
             newSprite = sprite;
             break;
         }
