@@ -37,6 +37,7 @@
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
+    // ccc4(120, 225, 255, 255) old cyan color
 	if( (self=[super initWithColor:ccc4(120, 225, 255, 255)])) {
         tcellSprites = [[NSMutableArray alloc] init];
         receptorSprites = [[NSMutableArray alloc] init];
@@ -50,7 +51,8 @@
         
         apc = [CCSprite spriteWithFile:@"MZNH_APC.png"];
         //apc.color = ccc3(150, 50, 255);
-        apc.color = ccc3(150, 0, 200);
+        //apc.color = ccc3(150, 0, 200); purple
+        apc.color = ccc3(255,0,0);
         apc.scale = APC_SCALE;
         apc.position = ccp(660, size.height/2);
         apcRadius = apc.boundingBox.size.width/2;
@@ -99,14 +101,13 @@
 - (void)removeCell:(MZNHTCellSprite *)cell dirty:(BOOL)dirty {
     if (dirty) cell.color = ccc3(200, 0, 0);
     else cell.color = ccc3(0, 200, 0);
-    CCAction *scaleAction = [CCScaleTo actionWithDuration: 0.4 scale:0 ];
+    CCAction *scaleAction = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:.9],
+                             [CCScaleTo actionWithDuration:0.4 scale:0], nil];
     [cell runAction:scaleAction];
+
     [tcellSprites removeObject:cell];
     if (dirty) score--;
-    else {
-		score += 2;
-		AudioServicesPlaySystemSound(popSoundID);
-	}
+    else AudioServicesPlaySystemSound(popSoundID);
 }
 
 //On touchDownInside, 'selects' sprite
@@ -160,9 +161,20 @@
     for (MZNHAPCReceptorSprite *rec in receptorSprites) {
         float dist = ccpDistance([rec.parent convertToWorldSpace:rec.position], cell.position);
         float collision = rec.contentSize.width/2 + cell.contentSize.height/2;
-		if (dist < collision) {
+		if (dist < collision - 20) {
 			if (selSprite == cell) selSprite = nil;
-			[self removeCell:cell dirty: !([rec.peptide isEqualToString: cell.peptide] && cell.functional)];
+            if (cell.functional && [cell.peptide isEqualToString:rec.peptide]) {
+                [tcellSprites removeObject:cell];
+                MZNHTCellSprite *newSprite = [MZNHTCellSprite spriteWithTexture:[cell texture]];
+                newSprite.position = CGPointMake(-30, rec.contentSize.height/2);
+                [self removeChild:cell cleanup:YES];
+                [rec addChild:newSprite];
+                score += 2;
+                break;
+            }
+            else {
+                [self removeCell:cell dirty:YES];
+            }
 			return YES;
 		}
     }
@@ -178,6 +190,7 @@
 }
 
 - (void)update:(ccTime)dt {
+    //NSLog(@"%d",random());
 	CGSize size = [[CCDirector sharedDirector] winSize];
     apc.rotation -= .3;
     [scoreLabel setString:[NSString stringWithFormat:@"SCORE: %d",score]];
@@ -198,6 +211,11 @@
         if ([self tCellCollidesWithAPC:cell]) break;
         if([self tCellCollidesWithReceptor:cell]) break;
 	}
+    for (MZNHAPCReceptorSprite *rec in receptorSprites) {
+        CGPoint recPos = [rec.parent convertToWorldSpace:rec.position];
+        if (rec.children != NULL && recPos.x > 500 ) [rec removeAllChildrenWithCleanup:YES];
+                                               
+    }
 }
 
 - (void) spawnTCell: (ccTime) dt {
