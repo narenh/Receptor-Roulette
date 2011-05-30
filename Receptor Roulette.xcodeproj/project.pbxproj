@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0AA47E4A13834EE200817168 /* MZNHAPCReceptorSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */; };
-		9B18134C1391ECB70077A8AB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B18134B1391ECB70077A8AB /* Default.png */; };
 		9B18134E1391ED0F0077A8AB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B18134D1391ED0F0077A8AB /* Default@2x.png */; };
 		9B19B07C1384679000EEA05E /* MZNHTCellSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */; };
+		9B4D351013934BCE00597948 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D350F13934BCE00597948 /* Default.png */; };
 		9B728751139191E2003D62B8 /* MZNH_APC_SB-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B72873E139191E2003D62B8 /* MZNH_APC_SB-hd.png */; };
 		9B728752139191E2003D62B8 /* MZNH_APC_SG-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B72873F139191E2003D62B8 /* MZNH_APC_SG-hd.png */; };
 		9B728753139191E2003D62B8 /* MZNH_APC_SP-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B728740139191E2003D62B8 /* MZNH_APC_SP-hd.png */; };
@@ -164,10 +164,10 @@
 /* Begin PBXFileReference section */
 		0AA47E4813834EE200817168 /* MZNHAPCReceptorSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHAPCReceptorSprite.h; sourceTree = "<group>"; };
 		0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHAPCReceptorSprite.m; sourceTree = "<group>"; };
-		9B18134B1391ECB70077A8AB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		9B18134D1391ED0F0077A8AB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		9B19B07A1384679000EEA05E /* MZNHTCellSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHTCellSprite.h; sourceTree = "<group>"; };
 		9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHTCellSprite.m; sourceTree = "<group>"; };
+		9B4D350F13934BCE00597948 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9B72873E139191E2003D62B8 /* MZNH_APC_SB-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MZNH_APC_SB-hd.png"; sourceTree = "<group>"; };
 		9B72873F139191E2003D62B8 /* MZNH_APC_SG-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MZNH_APC_SG-hd.png"; sourceTree = "<group>"; };
 		9B728740139191E2003D62B8 /* MZNH_APC_SP-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MZNH_APC_SP-hd.png"; sourceTree = "<group>"; };
@@ -597,8 +597,8 @@
 			children = (
 				9B9393101391EDB400FB1E0F /* icon-hd.png */,
 				9B93930E1391EDAC00FB1E0F /* icon-sm.png */,
+				9B4D350F13934BCE00597948 /* Default.png */,
 				9B18134D1391ED0F0077A8AB /* Default@2x.png */,
-				9B18134B1391ECB70077A8AB /* Default.png */,
 				9B72873D139191D4003D62B8 /* HD */,
 				9B19B07D1384682600EEA05E /* Cocos2d Images */,
 				9B262A571382C65E008223EF /* T-Cells */,
@@ -953,10 +953,10 @@
 				9B728761139191E2003D62B8 /* MZNH_Tc_TG-hd.png in Resources */,
 				9B728762139191E2003D62B8 /* MZNH_Tc_TP_-hd.png in Resources */,
 				9B728763139191E2003D62B8 /* MZNH_Tc_TP-hd.png in Resources */,
-				9B18134C1391ECB70077A8AB /* Default.png in Resources */,
 				9B18134E1391ED0F0077A8AB /* Default@2x.png in Resources */,
 				9B93930F1391EDAC00FB1E0F /* icon-sm.png in Resources */,
 				9B9393111391EDB400FB1E0F /* icon-hd.png in Resources */,
+				9B4D351013934BCE00597948 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
