@@ -18,7 +18,7 @@ static NSArray * peptideNames = nil;
 + (MZNHTCellSprite *) randomTCellSprite {
 	NSUInteger i = random() % ([[MZNHTCellSprite peptideNames] count]-1);
 	NSString * peptideName = [[MZNHTCellSprite peptideNames] objectAtIndex: i];
-	BOOL functional = (random() & 1) ? YES : NO;
+	BOOL functional = (random() % 20 > 7 ) ? YES : NO;
 	MZNHTCellSprite * cell = [MZNHTCellSprite spriteWithFile:
 							  [NSString stringWithFormat: spriteFilenameFormat,
 							   peptideName, (functional ? @"" : @"_")]];

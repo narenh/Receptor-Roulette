@@ -37,6 +37,7 @@
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
+    // ccc4(120, 225, 255, 255) old cyan color
 	if( (self=[super initWithColor:ccc4(120, 225, 255, 255)])) {
         tcellSprites = [[NSMutableArray alloc] init];
         receptorSprites = [[NSMutableArray alloc] init];
@@ -50,7 +51,8 @@
         
         apc = [CCSprite spriteWithFile:@"MZNH_APC.png"];
         //apc.color = ccc3(150, 50, 255);
-        apc.color = ccc3(150, 0, 200);
+        //apc.color = ccc3(150, 0, 200); purple
+        apc.color = ccc3(255,0,0);
         apc.scale = APC_SCALE;
         apc.position = ccp(660, size.height/2);
         apcRadius = apc.boundingBox.size.width/2;
@@ -100,7 +102,7 @@
 
     [tcellSprites removeObject:cell];
     if (dirty) score--;
-    else score += 2;
+    //else score += 2;
 }
 
 //On touchDownInside, 'selects' sprite
@@ -183,6 +185,7 @@
 }
 
 - (void)update:(ccTime)dt {
+    //NSLog(@"%d",random());
 	CGSize size = [[CCDirector sharedDirector] winSize];
     apc.rotation -= .3;
     [scoreLabel setString:[NSString stringWithFormat:@"SCORE: %d",score]];
