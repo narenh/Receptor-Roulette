@@ -42,6 +42,7 @@
         tcellSprites = [[NSMutableArray alloc] init];
         receptorSprites = [[NSMutableArray alloc] init];
         score = 0;
+		nextTcellZOrder = 1;
         
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -87,7 +88,7 @@
 // Finds sprite that has been touched
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
     MZNHTCellSprite *newSprite = nil;
-    for (MZNHTCellSprite *sprite in tcellSprites) {
+    for (MZNHTCellSprite *sprite in [self arrangedTCellSprites]) {
         if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {            
             newSprite = sprite;
             break;
@@ -111,10 +112,10 @@
 }
 
 //On touchDownInside, 'selects' sprite
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event { 
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    [self selectSpriteForTouch:touchLocation];      
-    return TRUE;    
+    [self selectSpriteForTouch:touchLocation];
+    return TRUE;
 }
 //Handles double tap
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -226,9 +227,13 @@
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
 		[tcellSprites addObject: cell];
-		
-		[self addChild: cell];
+		[self addChild: cell z: nextTcellZOrder++];
 	}
+}
+
+-(NSArray *)arrangedTCellSprites {
+	NSSortDescriptor * zSorter = [[[NSSortDescriptor alloc] initWithKey:@"zOrder" ascending: NO] autorelease];
+	return [tcellSprites sortedArrayUsingDescriptors: [NSArray arrayWithObjects:zSorter, nil]];
 }
 
 - (void)onEnter {

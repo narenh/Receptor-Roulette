@@ -25,11 +25,13 @@
     NSMutableArray *receptorSprites;
     float apcRadius;
 	SystemSoundID popSoundID;
+	NSUInteger nextTcellZOrder;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 -(CGFloat)angleAtPosition:(CGPoint)position;
-- (void)spawnTCell:(ccTime)dt;
+-(void)spawnTCell:(ccTime)dt;
+-(NSArray *)arrangedTCellSprites;
 
 @end
