@@ -26,6 +26,7 @@
     float apcRadius;
 	SystemSoundID popSoundID;
 	NSUInteger nextTcellZOrder;
+	float totalTime;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

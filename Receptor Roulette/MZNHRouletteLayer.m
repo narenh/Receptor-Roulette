@@ -43,6 +43,7 @@
         receptorSprites = [[NSMutableArray alloc] init];
         score = 0;
 		nextTcellZOrder = 1;
+		totalTime = 0.0;
         
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -220,8 +221,11 @@
 }
 
 - (void) spawnTCell: (ccTime) dt {
-	// FIXME: Add increasing probabilities based on total time passed
-	if (random() & 1) {
+	totalTime += dt;
+	float frac = (float)random() / RAND_MAX;
+	float t = 1.0 / logf((totalTime / 20.0) + 5);
+	NSLog(@"%f : %f", frac, t);
+	if (frac > t) {
 		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
@@ -239,7 +243,7 @@
 - (void)onEnter {
 	[super onEnter];
 	[self scheduleUpdate];
-	[self schedule: @selector(spawnTCell:) interval: 1.2];
+	[self schedule: @selector(spawnTCell:) interval: 1.0];
 }
 
 - (void)onExit {
