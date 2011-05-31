@@ -89,11 +89,12 @@
 // Finds sprite that has been touched
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
     MZNHTCellSprite *newSprite = nil;
-    for (MZNHTCellSprite *sprite in [self arrangedTCellSprites]) {
+	NSUInteger maxZOrder = 0;
+    for (MZNHTCellSprite *sprite in tcellSprites) {
         float dist = ccpDistance(sprite.position, touchLocation);
-		if (dist < (sprite.contentSize.width/2) - 20) {
+		if ((dist < (sprite.contentSize.width/2) - 20) && (sprite.zOrder >= maxZOrder)) {
             newSprite = sprite;
-            break;
+			maxZOrder = sprite.zOrder;
         }
     }    
     if (newSprite != selSprite) {            
@@ -225,7 +226,6 @@
 	totalTime += dt;
 	float frac = (float)random() / RAND_MAX;
 	float t = 1.0 / logf((totalTime / 20.0) + 5);
-	NSLog(@"%f : %f", frac, t);
 	if (frac > t) {
 		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
@@ -234,11 +234,6 @@
 		[tcellSprites addObject: cell];
 		[self addChild: cell z: nextTcellZOrder++];
 	}
-}
-
--(NSArray *)arrangedTCellSprites {
-	NSSortDescriptor * zSorter = [[[NSSortDescriptor alloc] initWithKey:@"zOrder" ascending: NO] autorelease];
-	return [tcellSprites sortedArrayUsingDescriptors: [NSArray arrayWithObjects:zSorter, nil]];
 }
 
 - (void)onEnter {

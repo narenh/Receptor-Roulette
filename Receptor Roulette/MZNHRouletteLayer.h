@@ -33,6 +33,5 @@
 +(CCScene *) scene;
 -(CGFloat)angleAtPosition:(CGPoint)position;
 -(void)spawnTCell:(ccTime)dt;
--(NSArray *)arrangedTCellSprites;
 
 @end
