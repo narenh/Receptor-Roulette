@@ -8,6 +8,8 @@
 
 #import "MZNHTCellSprite.h"
 
+#define ARC4RANDOM_MAX 0x100000000
+
 static NSString * spriteFilenameFormat = @"MZNH_Tc_%@%@.png";
 static NSArray * peptideNames = nil;
 
@@ -25,7 +27,7 @@ static NSArray * peptideNames = nil;
 	cell.peptide = peptideName;
 	cell.functional = functional;
 	CGSize size = [[CCDirector sharedDirector] winSize];
-	cell.position = ccp(0.0, ((float)arc4random()/(2.0*RAND_MAX)) *
+	cell.position = ccp(0.0, ((float)arc4random()/ARC4RANDOM_MAX) *
 						(size.height - cell.contentSize.height * 2)
 						+ cell.contentSize.height );
     if (random()%20 < 4) {
