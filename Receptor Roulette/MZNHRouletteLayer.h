@@ -19,6 +19,7 @@
 {
     int score;
     CCLabelTTF *scoreLabel;
+    CCLabelTTF *scoreLabelShadow;
     CCSprite *apc; //
     MZNHTCellSprite *selSprite; // T-cell the user taps on
     NSMutableArray *tcellSprites; // Keeps track of t-cells on the screen

@@ -11,6 +11,8 @@
 		0AA47E4A13834EE200817168 /* MZNHAPCReceptorSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA47E4913834EE200817168 /* MZNHAPCReceptorSprite.m */; };
 		9B18134E1391ED0F0077A8AB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B18134D1391ED0F0077A8AB /* Default@2x.png */; };
 		9B19B07C1384679000EEA05E /* MZNHTCellSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */; };
+		9B245CB1139990D800BDA2AE /* MZNHLose.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B245CAF139990D800BDA2AE /* MZNHLose.png */; };
+		9B245CB2139990D800BDA2AE /* MZNHWin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B245CB0139990D800BDA2AE /* MZNHWin.png */; };
 		9B4D351013934BCE00597948 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D350F13934BCE00597948 /* Default.png */; };
 		9B728751139191E2003D62B8 /* MZNH_APC_SB-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B72873E139191E2003D62B8 /* MZNH_APC_SB-hd.png */; };
 		9B728752139191E2003D62B8 /* MZNH_APC_SG-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B72873F139191E2003D62B8 /* MZNH_APC_SG-hd.png */; };
@@ -170,6 +172,8 @@
 		9B18134D1391ED0F0077A8AB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		9B19B07A1384679000EEA05E /* MZNHTCellSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNHTCellSprite.h; sourceTree = "<group>"; };
 		9B19B07B1384679000EEA05E /* MZNHTCellSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZNHTCellSprite.m; sourceTree = "<group>"; };
+		9B245CAF139990D800BDA2AE /* MZNHLose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MZNHLose.png; sourceTree = "<group>"; };
+		9B245CB0139990D800BDA2AE /* MZNHWin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MZNHWin.png; sourceTree = "<group>"; };
 		9B4D350F13934BCE00597948 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9B72873E139191E2003D62B8 /* MZNH_APC_SB-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MZNH_APC_SB-hd.png"; sourceTree = "<group>"; };
 		9B72873F139191E2003D62B8 /* MZNH_APC_SG-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MZNH_APC_SG-hd.png"; sourceTree = "<group>"; };
@@ -368,7 +372,7 @@
 		9BAF41B21379F6FA0007BC91 /* utlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utlist.h; path = libs/cocos2d/Support/utlist.h; sourceTree = "<group>"; };
 		9BAF41B31379F6FA0007BC91 /* ZipUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZipUtils.h; path = libs/cocos2d/Support/ZipUtils.h; sourceTree = "<group>"; };
 		9BAF41B41379F6FA0007BC91 /* ZipUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ZipUtils.m; path = libs/cocos2d/Support/ZipUtils.m; sourceTree = "<group>"; };
-		9BAF41B61379F6FA0007BC91 /* LICENSE_cocos2d.txt */ = {isa = PBXFileReference; name = LICENSE_cocos2d.txt; path = "Receptor Roulette/libs/LICENSE_cocos2d.txt"; sourceTree = "<group>"; };
+		9BAF41B61379F6FA0007BC91 /* LICENSE_cocos2d.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_cocos2d.txt; path = "Receptor Roulette/libs/LICENSE_cocos2d.txt"; sourceTree = "<group>"; };
 		9BAF41B81379F6FA0007BC91 /* CDAudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CDAudioManager.h; path = libs/CocosDenshion/CDAudioManager.h; sourceTree = "<group>"; };
 		9BAF41B91379F6FA0007BC91 /* CDAudioManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CDAudioManager.m; path = libs/CocosDenshion/CDAudioManager.m; sourceTree = "<group>"; };
 		9BAF41BB1379F6FA0007BC91 /* CDConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CDConfig.h; path = libs/CocosDenshion/CDConfig.h; sourceTree = "<group>"; };
@@ -378,14 +382,14 @@
 		9BAF41C01379F6FA0007BC91 /* CocosDenshion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CocosDenshion.m; path = libs/CocosDenshion/CocosDenshion.m; sourceTree = "<group>"; };
 		9BAF41C21379F6FA0007BC91 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimpleAudioEngine.h; path = libs/CocosDenshion/SimpleAudioEngine.h; sourceTree = "<group>"; };
 		9BAF41C31379F6FA0007BC91 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SimpleAudioEngine.m; path = libs/CocosDenshion/SimpleAudioEngine.m; sourceTree = "<group>"; };
-		9BAF41C51379F6FA0007BC91 /* LICENSE_CocosDenshion.txt */ = {isa = PBXFileReference; name = LICENSE_CocosDenshion.txt; path = "Receptor Roulette/libs/LICENSE_CocosDenshion.txt"; sourceTree = "<group>"; };
+		9BAF41C51379F6FA0007BC91 /* LICENSE_CocosDenshion.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_CocosDenshion.txt; path = "Receptor Roulette/libs/LICENSE_CocosDenshion.txt"; sourceTree = "<group>"; };
 		9BAF41C71379F6FA0007BC91 /* CLScoreServerPost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CLScoreServerPost.h; path = libs/cocoslive/CLScoreServerPost.h; sourceTree = "<group>"; };
 		9BAF41C81379F6FA0007BC91 /* CLScoreServerPost.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CLScoreServerPost.m; path = libs/cocoslive/CLScoreServerPost.m; sourceTree = "<group>"; };
 		9BAF41CA1379F6FA0007BC91 /* CLScoreServerRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CLScoreServerRequest.h; path = libs/cocoslive/CLScoreServerRequest.h; sourceTree = "<group>"; };
 		9BAF41CB1379F6FA0007BC91 /* CLScoreServerRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CLScoreServerRequest.m; path = libs/cocoslive/CLScoreServerRequest.m; sourceTree = "<group>"; };
 		9BAF41CD1379F6FA0007BC91 /* cocoslive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cocoslive.h; path = libs/cocoslive/cocoslive.h; sourceTree = "<group>"; };
 		9BAF41CE1379F6FA0007BC91 /* cocoslive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = cocoslive.m; path = libs/cocoslive/cocoslive.m; sourceTree = "<group>"; };
-		9BAF41D01379F6FA0007BC91 /* LICENSE_TouchJSON.txt */ = {isa = PBXFileReference; name = LICENSE_TouchJSON.txt; path = "Receptor Roulette/libs/LICENSE_TouchJSON.txt"; sourceTree = "<group>"; };
+		9BAF41D01379F6FA0007BC91 /* LICENSE_TouchJSON.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_TouchJSON.txt; path = "Receptor Roulette/libs/LICENSE_TouchJSON.txt"; sourceTree = "<group>"; };
 		9BAF41D21379F6FA0007BC91 /* CDataScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CDataScanner.h; path = libs/TouchJSON/CDataScanner.h; sourceTree = "<group>"; };
 		9BAF41D31379F6FA0007BC91 /* CDataScanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CDataScanner.m; path = libs/TouchJSON/CDataScanner.m; sourceTree = "<group>"; };
 		9BAF41D51379F6FA0007BC91 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CDataScanner_Extensions.h; path = libs/TouchJSON/Extensions/CDataScanner_Extensions.h; sourceTree = "<group>"; };
@@ -410,7 +414,7 @@
 		9BAF41F21379F6FA0007BC91 /* ZAttributedStringPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZAttributedStringPrivate.h; path = libs/FontLabel/ZAttributedStringPrivate.h; sourceTree = "<group>"; };
 		9BAF41F31379F6FA0007BC91 /* ZFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZFont.h; path = libs/FontLabel/ZFont.h; sourceTree = "<group>"; };
 		9BAF41F41379F6FA0007BC91 /* ZFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ZFont.m; path = libs/FontLabel/ZFont.m; sourceTree = "<group>"; };
-		9BAF41F61379F6FA0007BC91 /* LICENSE_FontLabel.txt */ = {isa = PBXFileReference; name = LICENSE_FontLabel.txt; path = "Receptor Roulette/libs/LICENSE_FontLabel.txt"; sourceTree = "<group>"; };
+		9BAF41F61379F6FA0007BC91 /* LICENSE_FontLabel.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_FontLabel.txt; path = "Receptor Roulette/libs/LICENSE_FontLabel.txt"; sourceTree = "<group>"; };
 		9BAF41F81379F6FA0007BC91 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		9BAF41F91379F6FA0007BC91 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BAF41FB1379F6FA0007BC91 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -592,6 +596,8 @@
 		9BAF40B11379F6F80007BC91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B245CAF139990D800BDA2AE /* MZNHLose.png */,
+				9B245CB0139990D800BDA2AE /* MZNHWin.png */,
 				0A2A1CAA138EA426001DE97C /* Pop1.wav */,
 				9B9393101391EDB400FB1E0F /* icon-hd.png */,
 				9B93930E1391EDAC00FB1E0F /* icon-sm.png */,
@@ -951,6 +957,8 @@
 				9B93930F1391EDAC00FB1E0F /* icon-sm.png in Resources */,
 				9B9393111391EDB400FB1E0F /* icon-hd.png in Resources */,
 				9B4D351013934BCE00597948 /* Default.png in Resources */,
+				9B245CB1139990D800BDA2AE /* MZNHLose.png in Resources */,
+				9B245CB2139990D800BDA2AE /* MZNHWin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
