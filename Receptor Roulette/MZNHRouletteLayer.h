@@ -12,6 +12,7 @@
 #import "CGPointExtension.h"
 #import "MZNHTCellSprite.h"
 #import "MZNHAPCReceptorSprite.h"
+#import <AudioToolbox/AudioServices.h>
 
 // HelloWorldLayer
 @interface MZNHRouletteLayer : CCLayerColor
@@ -23,11 +24,14 @@
     NSMutableArray *tcellSprites; // Keeps track of t-cells on the screen
     NSMutableArray *receptorSprites; // Keeps track or receptors on the APC
     float apcRadius;
+	SystemSoundID popSoundID;
+	NSUInteger nextTcellZOrder;
+	float totalTime;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 -(CGFloat)angleAtPosition:(CGPoint)position;
-- (void)spawnTCell:(ccTime)dt;
+-(void)spawnTCell:(ccTime)dt;
 
 @end

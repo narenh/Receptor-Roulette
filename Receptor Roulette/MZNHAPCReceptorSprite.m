@@ -8,7 +8,12 @@
 
 #import "MZNHAPCReceptorSprite.h"
 
+/** The filename format for receptor images:
+ MZNH_APC_[peptide].png
+ where [peptide] comes from peptideNames */
 static NSString * spriteFilenameFormat = @"MZNH_APC_%@.png";
+
+/** A lazily populated array of valid peptide names */
 static NSArray * peptideNames = nil;
 
 @implementation MZNHAPCReceptorSprite
@@ -23,6 +28,7 @@ static NSArray * peptideNames = nil;
 	return rec;
 }
 
+/** Returns the array of valid peptide names. If necessary, populates it first. */
 + (NSArray *) peptideNames
 {
 	if (! peptideNames) {

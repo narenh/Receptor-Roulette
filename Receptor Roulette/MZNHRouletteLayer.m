@@ -41,6 +41,8 @@
         tcellSprites = [[NSMutableArray alloc] init];
         receptorSprites = [[NSMutableArray alloc] init];
         score = 0;
+		nextTcellZOrder = 1;
+		totalTime = 0.0;
         
         // CC touch handling
 		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
@@ -77,6 +79,11 @@
             sprite.rotation = 180 + -180 * angle / M_PI;
             [receptorSprites addObject:sprite];
         }
+
+		// Add audio sound
+		CFBundleRef bundle = CFBundleGetMainBundle();
+		CFURLRef res = CFBundleCopyResourceURL(bundle, CFSTR("Pop1"), CFSTR("wav"), NULL);
+		AudioServicesCreateSystemSoundID(res, &popSoundID);
 	}
 	return self;
 }
@@ -107,13 +114,14 @@
 
     [tcellSprites removeObject:cell];
     if (dirty) score--;
+    else AudioServicesPlaySystemSound(popSoundID);
 }
 
 //On touchDownInside, 'selects' sprite
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event { 
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    [self selectSpriteForTouch:touchLocation];      
-    return TRUE;    
+    [self selectSpriteForTouch:touchLocation];
+    return TRUE;
 }
 //Handles double tap
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -199,6 +207,7 @@
 	for (MZNHTCellSprite *cell in tcellSprites) {
         // T-Cell Motion
         if (cell != selSprite) cell.position = ccpAdd(cell.position, ccp(dt * 40.0, 0));
+
         cell.rotation = [self angleAtPosition: cell.position];
         if (cell.position.x >= (size.width + cell.contentSize.width)) {
             [tcellSprites removeObject: cell];
@@ -212,16 +221,18 @@
 	}
 }
 
-- (void) spawnTCell:(ccTime)dt {
-	// FIXME: Add increasing probabilities based on total time passed
-	if (random() & 1) {
+
+- (void) spawnTCell: (ccTime) dt {
+	totalTime += dt;
+	float frac = (float)random() / RAND_MAX;
+	float t = 1.0 / logf((totalTime / 20.0) + 5);
+	if (frac > t) {
 		MZNHTCellSprite * cell = [MZNHTCellSprite randomTCellSprite];
 		cell.scale = 0.0;
 		CCAction * scaleAction = [CCScaleTo actionWithDuration: 0.2 scale:TCELL_SCALE ];
 		[cell runAction: scaleAction];
 		[tcellSprites addObject: cell];
-		
-		[self addChild: cell];
+		[self addChild: cell z: nextTcellZOrder++];
 	}
 }
 - (void)cleanAPC {
@@ -237,6 +248,7 @@
 	[self scheduleUpdate];
 	[self schedule: @selector(spawnTCell:) interval: 1.2];
     [self schedule: @selector(cleanAPC) interval: 5];
+
 }
 
 - (void)onExit {
