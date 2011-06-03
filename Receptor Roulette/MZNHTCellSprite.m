@@ -57,9 +57,9 @@ static NSArray * peptideNames = nil;
 	return cell;
 }
 
+/** Returns the array of valid peptide names. If necessary, populates it first. */
 + (NSArray *) peptideNames
 {
-	// Only instantiate the array if it doesn't exist yet
 	if (! peptideNames)
 		peptideNames = [[NSArray alloc] initWithObjects: @"SB", @"SG", @"SP", @"TB", @"TG", @"TP", nil];
 	return peptideNames;
