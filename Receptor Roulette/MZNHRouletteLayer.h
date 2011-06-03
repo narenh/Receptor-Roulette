@@ -18,10 +18,10 @@
 {
     int score;
     CCLabelTTF *scoreLabel;
-    MZNHAPCReceptorSprite *apc;
-    MZNHTCellSprite *selSprite;
-    NSMutableArray *tcellSprites;
-    NSMutableArray *receptorSprites;
+    CCSprite *apc; //
+    MZNHTCellSprite *selSprite; // T-cell the user taps on
+    NSMutableArray *tcellSprites; // Keeps track of t-cells on the screen
+    NSMutableArray *receptorSprites; // Keeps track or receptors on the APC
     float apcRadius;
 }
 
